@@ -1,36 +1,204 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Chunav Mitra — India Election Guide
 
-## Getting Started
+AI-powered civic education assistant for Indian elections. Built with Next.js 15, React 19, Google GenAI, and next-intl.
 
-First, run the development server:
+## Features
+
+- **9-Step Electoral Journey** — from "What is an Election?" to "Government Formation"
+- **Persona-Based Learning** — Student, First-Time Voter, General/Elderly Citizen
+- **Gamified Quizzes** — earn points and badges for completing steps
+- **EVM Simulator** — high-fidelity mock voting with VVPAT 7-second verification
+- **AI Chatbot (Chunav Mitra)** — Google GenAI with political neutrality guardrails
+- **Multilingual** — English, Hindi, Gujarati (scalable to all 22 official languages)
+- **Accessibility** — WCAG 2.1 AA compliant, voice narration, large text, high contrast
+- **Voter Verification** — EPIC number lookup via ECI API Setu
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 15 (App Router) |
+| UI | React 19 + TypeScript |
+| Styling | Tailwind CSS v4 |
+| Animation | Framer Motion |
+| State | Zustand (persisted) |
+| Forms | React Hook Form + Zod |
+| i18n | next-intl |
+| AI | Google GenAI SDK (Gemini 2.0 Flash) |
+| Deployment | Vercel |
+
+## Project Structure
+
+```
+frontend/
+├── app/
+│   ├── [locale]/
+│   │   ├── layout.tsx              # Locale provider
+│   │   ├── page.tsx                # Persona selector
+│   │   ├── journey/
+│   │   │   ├── layout.tsx          # Progress bar + accessibility toolbar
+│   │   │   └── [step]/page.tsx     # Dynamic step renderer
+│   │   ├── simulator/page.tsx      # EVM simulator
+│   │   └── verify/page.tsx         # Voter ID verification
+│   └── api/
+│       ├── chat/route.ts           # Google GenAI chatbot
+│       └── verify-voter/route.ts   # ECI API proxy
+├── components/
+│   ├── journey/
+│   │   ├── PersonaSelector.tsx
+│   │   ├── TimelineSlider.tsx
+│   │   ├── StepCard.tsx
+│   │   ├── GamifiedQuiz.tsx
+│   │   └── steps/                  # Step1–Step9 components
+│   ├── simulator/
+│   │   ├── EVMSimulator.tsx
+│   │   ├── ControlUnit.tsx
+│   │   ├── BallotingUnit.tsx
+│   │   └── VVPATDisplay.tsx
+│   ├── chatbot/
+│   │   ├── ChunавMitraFAB.tsx
+│   │   ├── ChatWindow.tsx
+│   │   └── MessageBubble.tsx
+│   ├── accessibility/
+│   │   ├── AccessibilityToolbar.tsx
+│   │   └── VoiceNarration.tsx
+│   └── VoterVerifyForm.tsx
+├── context/
+│   └── journeyStore.ts             # Zustand global state
+├── lib/
+│   ├── utils.ts
+│   ├── validators.ts               # Zod schemas
+│   ├── eci-apis.ts                 # ECI API client
+│   └── chatbot-config.ts           # Google GenAI config + guardrails
+├── messages/
+│   ├── en.json
+│   ├── hi.json
+│   └── gu.json
+├── i18n.ts                         # next-intl config
+├── middleware.ts                   # Locale detection
+└── .env.local                      # API keys (never commit)
+```
+
+## Setup
+
+### Prerequisites
+
+- Node.js 18+
+- npm or pnpm
+
+### Installation
+
+```bash
+cd frontend
+npm install
+```
+
+### Environment Variables
+
+Create `.env.local`:
+
+```env
+GOOGLE_GENAI_API_KEY=your_google_genai_api_key
+ECI_API_KEY=your_eci_api_key
+ECI_API_BASE_URL=https://api.apisetu.gov.in
+```
+
+Get keys:
+- Google GenAI: https://aistudio.google.com/app/apikey
+- ECI API Setu: https://www.apisetu.gov.in
+
+### Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+### Testing
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm test              # Vitest unit tests
+npm run test:e2e      # Playwright E2E tests
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Architecture Highlights
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Multilingual Routing
 
-## Deploy on Vercel
+- Middleware detects `Accept-Language` header
+- Auto-redirects to `/en`, `/hi`, or `/gu`
+- Translation files lazy-loaded per step
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### State Management
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Zustand store persisted to localStorage
+- Tracks: persona, currentStep, quizScores, totalPoints, badges, accessibilityPrefs
+- No prop drilling — global access via `useJourneyStore()`
+
+### Accessibility
+
+- Semantic HTML (`<main>`, `<nav>`, `<section>`)
+- ARIA live regions for dynamic content
+- 44×44px minimum touch targets
+- Voice narration via Web Speech API (language-aware)
+- CSS data attributes for large text and high contrast modes
+
+### Chatbot Neutrality
+
+Two-layer guardrail:
+1. **Client-side regex pre-filter** — biased queries return hardcoded neutral response without hitting the model
+2. **Server-side system prompt** — instructs Gemini to remain strictly neutral and cite ECI sources
+
+### EVM Simulator
+
+State machine: `idle → ballot-released → vote-cast → vvpat → complete`
+
+- 7-second VVPAT countdown with Web Audio API beep
+- Animated slip drop into sealed box
+- Security facts overlay post-vote
+
+## Deployment
+
+### Vercel (Recommended)
+
+```bash
+vercel
+```
+
+Set environment variables in Vercel dashboard.
+
+### Docker
+
+```dockerfile
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+CMD ["npm", "start"]
+```
+
+## Roadmap
+
+- [ ] Add remaining 19 official languages
+- [ ] Integrate real ECI ERONET API (currently mock)
+- [ ] PWA support for offline access
+- [ ] SMS-based voter registration reminders
+- [ ] Admin dashboard for SVEEP officers
+
+## License
+
+MIT
+
+## Credits
+
+Built for the Election Commission of India's SVEEP initiative.

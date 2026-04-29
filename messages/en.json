@@ -1,0 +1,502 @@
+{
+  "common": {
+    "next": "Next",
+    "back": "Back",
+    "skip": "Skip Quiz",
+    "learnMore": "Learn More",
+    "close": "Close",
+    "loading": "Loading...",
+    "verify": "Verify",
+    "points": "pts"
+  },
+  "nav": {
+    "home": "Home",
+    "journey": "My Journey",
+    "simulator": "Vote Simulator",
+    "verify": "Verify Voter ID",
+    "chatbot": "Ask Chunav Mitra"
+  },
+  "accessibility": {
+    "largeText": "Large Text",
+    "highContrast": "High Contrast",
+    "voiceNarration": "Voice Narration",
+    "stopNarration": "Stop Narration"
+  },
+  "persona": {
+    "title": "Who are you?",
+    "subtitle": "We'll personalize your journey based on your profile.",
+    "student": "Student",
+    "studentDesc": "Under 18, learning about democracy and civic duties.",
+    "first-time": "First-Time Voter",
+    "first-timeDesc": "Newly eligible, ready to register and vote.",
+    "general": "General / Elderly Citizen",
+    "generalDesc": "Looking for logistical help and electoral roll info."
+  },
+  "journey": {
+    "title": "Your Electoral Journey",
+    "stepOf": "Step {current} of {total}",
+    "quizTitle": "Quick Check",
+    "quizCorrect": "Correct! +{points} points",
+    "quizWrong": "Not quite. The answer is: {answer}",
+    "badgeEarned": "Badge Earned: {badge}",
+    "completeStep": "Complete Step +25 XP",
+    "overallProgress": "Overall Progress",
+    "stepLabels": {
+      "1": "What is an Election?",
+      "2": "Who Can Vote?",
+      "3": "Voter Registration",
+      "4": "Election Timeline",
+      "5": "Candidates & Nominations",
+      "6": "Campaigning",
+      "7": "Voting Day",
+      "8": "Counting & Results",
+      "9": "Government Formation"
+    }
+  },
+  "steps": {
+    "1": {
+      "title": "What is an Election?",
+      "subtitle": "Democracy starts with a single vote.",
+      "body": "Think of an election like choosing a class monitor. Instead of one classroom, the whole country chooses leaders to make decisions for us.",
+      "quiz": [
+        {
+          "question": "What does an election decide?",
+          "options": ["Who leads the country", "Who wins a cricket match", "Who gets a promotion"],
+          "correctIndex": 0
+        },
+        {
+          "question": "Which body conducts general elections in India?",
+          "options": ["The Supreme Court", "The Election Commission of India", "The Parliament"],
+          "correctIndex": 1
+        },
+        {
+          "question": "What is the difference between a Lok Sabha and a local election?",
+          "options": ["Lok Sabha chooses national leaders; local elections choose city/village leaders", "They are the same thing", "Lok Sabha is only for cities"],
+          "correctIndex": 0
+        }
+      ]
+    },
+    "2": {
+      "title": "Who Can Vote?",
+      "subtitle": "Every citizen has an equal voice.",
+      "body": "Every Indian citizen who is 18 years old has the power to vote. It does not matter what your gender, religion, or financial status is. One person equals one vote.",
+      "ageCalcLabel": "Enter your date of birth",
+      "alreadyEligible": "You are already eligible to vote!",
+      "quiz": [
+        {
+          "question": "What is the minimum voting age in India?",
+          "options": ["16", "18", "21"],
+          "correctIndex": 1
+        },
+        {
+          "question": "Which Article of the Constitution guarantees Universal Adult Suffrage?",
+          "options": ["Article 19", "Article 21", "Article 326"],
+          "correctIndex": 2
+        },
+        {
+          "question": "On which dates can a voter qualify for the electoral roll?",
+          "options": ["Only January 1st", "January 1, April 1, July 1, or October 1", "Any date after their 18th birthday"],
+          "correctIndex": 1
+        }
+      ]
+    },
+    "3": {
+      "title": "Voter Registration",
+      "subtitle": "Get your name on the list.",
+      "body": "Your Voter ID (EPIC) is your gateway to voting.",
+      "hasVoterId": "Do you already have a Voter ID?",
+      "yes": "Yes",
+      "no": "No",
+      "isNri": "Are you an NRI?",
+      "form6": "You need Form 6 — for new general voters.",
+      "form6a": "You need Form 6A — for NRI voters.",
+      "form8": "You need Form 8 — to update address or correct details.",
+      "findForm": "Find Your Form",
+      "startOver": "Start over",
+      "docsRequired": "Documents Required",
+      "applyCta": "Apply on ECI Voters Portal",
+      "forms": {
+        "form6": {
+          "title": "Form 6",
+          "tag": "New Registration",
+          "desc": "First-time voters use Form 6 to register on the electoral roll. You need Proof of Age and Proof of Address.",
+          "docs": [
+            "Proof of Age: Birth certificate, 10th certificate, or PAN card",
+            "Proof of Address: Aadhaar card, utility bill, or bank passbook"
+          ]
+        },
+        "form6a": {
+          "title": "Form 6A",
+          "tag": "NRI Voter",
+          "desc": "NRI citizens can register as overseas voters using Form 6A. You must hold a valid Indian passport.",
+          "docs": ["Valid Indian Passport", "Proof of overseas address"]
+        },
+        "form8": {
+          "title": "Form 8",
+          "tag": "Update / Correction",
+          "desc": "Use Form 8 to update your address, correct a misspelled name, or make other changes to your existing voter registration.",
+          "docs": ["Aadhaar Card", "Utility Bill / Bank Passbook (for address proof)"]
+        }
+      },
+      "quiz": [
+        {
+          "question": "Which form does a first-time Indian voter need to fill?",
+          "options": ["Form 8", "Form 6", "Form 6A"],
+          "correctIndex": 1
+        },
+        {
+          "question": "Which form should an NRI use to register as a voter?",
+          "options": ["Form 6", "Form 8", "Form 6A"],
+          "correctIndex": 2
+        },
+        {
+          "question": "Which document is NOT valid as Proof of Age for voter registration?",
+          "options": ["Birth certificate", "Ration card", "10th grade certificate"],
+          "correctIndex": 1
+        }
+      ]
+    },
+    "4": {
+      "title": "Election Announcement & Timeline",
+      "subtitle": "The countdown begins.",
+      "body": "Once the election dates are announced, strict rules apply. The government cannot announce new schemes. Political parties cannot use religion to ask for votes.",
+      "quiz": [
+        {
+          "question": "How many hours before polling must all campaigning stop?",
+          "options": ["24 hours", "48 hours", "72 hours"],
+          "correctIndex": 1
+        },
+        {
+          "question": "Which Section of the RP Act, 1951 mandates the 48-hour silence period?",
+          "options": ["Section 49N", "Section 126", "Section 135C"],
+          "correctIndex": 1
+        },
+        {
+          "question": "What does Section 135C prohibit during the silence period?",
+          "options": ["Voting", "Liquor sales (Dry Days)", "Counting of votes"],
+          "correctIndex": 1
+        },
+        {
+          "question": "When does the Model Code of Conduct come into effect?",
+          "options": ["One week before polling day", "The moment election dates are announced", "After nomination filing ends"],
+          "correctIndex": 1
+        }
+      ],
+      "timelineTitle": "Election Timeline",
+      "phases": [
+        {
+          "phase": "Election Announced",
+          "summary": "The Election Commission of India announces the election schedule and polling dates.",
+          "details": [
+            "ECI issues the official notification under Section 30 of the Representation of the People Act, 1951.",
+            "The announcement triggers the Model Code of Conduct immediately.",
+            "All election-related timelines — nomination, scrutiny, withdrawal — are calculated from this date."
+          ]
+        },
+        {
+          "phase": "Model Code of Conduct (MCC)",
+          "summary": "Strict rules apply to all political parties, candidates, and the government from the moment of announcement.",
+          "details": [
+            "The government cannot announce new welfare schemes, projects, or policies that could influence voters.",
+            "Political parties cannot use religion, caste, or community to seek votes.",
+            "Government machinery (vehicles, officials, buildings) cannot be used for campaign purposes.",
+            "Candidates must remove all election material from public places within 48 hours of polling ending."
+          ]
+        },
+        {
+          "phase": "Nomination Filing",
+          "summary": "Candidates file their nomination papers with the Returning Officer within the specified window.",
+          "details": [
+            "Candidates typically have 7–10 days after the public notice to file their nomination papers.",
+            "Each candidate must submit an affidavit declaring assets, liabilities, and any criminal record.",
+            "A security deposit is required (₹25,000 for Lok Sabha; ₹10,000 for State Assembly).",
+            "Scrutiny of nominations happens the day after the last date of filing (Section 36, RP Act).",
+            "Candidates can withdraw their nomination before the withdrawal deadline."
+          ]
+        },
+        {
+          "phase": "Campaign Period",
+          "summary": "Candidates and parties actively campaign — rallies, door-to-door visits, advertisements.",
+          "details": [
+            "Candidates may hold public rallies, distribute manifestos, and run advertisements.",
+            "All election expenditure must be recorded and submitted to the Returning Officer.",
+            "Lok Sabha candidates have a spending limit of ₹95 lakh per constituency (larger states).",
+            "Paid news and surrogate advertising are prohibited under ECI guidelines.",
+            "Exit polls are banned from the start of polling until 30 minutes after the last phase ends."
+          ]
+        },
+        {
+          "phase": "48-Hour Silence Period",
+          "summary": "All public campaigning must stop 48 hours before polling closes — Section 126, RP Act, 1951.",
+          "details": [
+            "No public meetings, rallies, processions, or road shows are permitted.",
+            "No election-related content can be broadcast on TV, radio, or social media.",
+            "Loudspeakers and public address systems for campaign purposes are banned.",
+            "Musical concerts and entertainment events used for campaigning are prohibited.",
+            "Section 135C: Liquor sales are prohibited ('Dry Days') during this period in the constituency.",
+            "Violation is a cognizable offence punishable with imprisonment up to 2 years or fine."
+          ]
+        },
+        {
+          "phase": "Polling Day",
+          "summary": "Voters cast their ballots at designated polling stations, typically from 7:00 AM to 6:00 PM.",
+          "details": [
+            "Polling stations are set up within 2 km of every voter's residence as per ECI norms.",
+            "Voters must carry a valid photo ID — EPIC, Aadhaar, Passport, Driving License, or PAN card.",
+            "Mobile phones are strictly prohibited inside the voting compartment.",
+            "Persons with disabilities and senior citizens (85+) are entitled to priority voting or home voting.",
+            "Central Armed Police Forces (CAPF) are deployed for security at sensitive booths."
+          ]
+        }
+      ],
+      "mccTitle": "Model Code of Conduct — Key Rules",
+      "mccRules": [
+        "No new government schemes after announcement",
+        "No use of religion or caste to seek votes",
+        "No government vehicles for campaign use",
+        "No cash or gifts to voters",
+        "No paid news or surrogate advertising",
+        "Dry Days during 48-hour silence period (Sec 135C)"
+      ],
+      "silencePeriodTitle": "48-Hour Silence Period",
+      "silencePeriodDesc": "Under Section 126 of the Representation of the People Act, 1951, all public campaigning — rallies, TV/radio broadcasts, social media ads — must stop 48 hours before polling closes. Section 135C additionally bans liquor sales ('Dry Days') in the constituency during this window."
+    },
+    "5": {
+      "title": "Candidates & Nominations",
+      "subtitle": "Anyone can stand for election.",
+      "body": "Anyone who meets the age and legal requirements can stand for election. They must fill out a form, declare their assets, and promise they are following the law.",
+      "quiz": [
+        {
+          "question": "Can a candidate hide their criminal record when filing nomination?",
+          "options": ["True", "False — they must submit an affidavit"],
+          "correctIndex": 1
+        },
+        {
+          "question": "Which phase checks if nomination forms are genuine?",
+          "options": ["Withdrawal", "Scrutiny (Section 36, RP Act)", "Polling"],
+          "correctIndex": 1
+        },
+        {
+          "question": "What is the security deposit for a Lok Sabha candidate?",
+          "options": ["₹10,000", "₹25,000", "₹50,000"],
+          "correctIndex": 1
+        }
+      ],
+      "phases": [
+        { "phase": "Filing", "desc": "Candidate submits nomination papers to the Returning Officer." },
+        { "phase": "Scrutiny", "desc": "Officials verify the forms are genuine (Section 36, RP Act)." },
+        { "phase": "Withdrawal", "desc": "Candidates can withdraw before the final list is published." },
+        { "phase": "Final List", "desc": "Official ballot list is published with symbols assigned." }
+      ]
+    },
+    "6": {
+      "title": "Campaigning",
+      "subtitle": "Winning hearts, following rules.",
+      "body": "Candidates can hold rallies and distribute manifestos. But bribing voters, intimidation, and organizing transport to the polling station are illegal corrupt practices.",
+      "quiz": [
+        {
+          "question": "Is it legal for a candidate to offer cash for votes?",
+          "options": ["Yes", "No — it is a corrupt practice"],
+          "correctIndex": 1
+        },
+        {
+          "question": "Which of these is a legal campaign activity?",
+          "options": ["Organizing transport to the polling booth", "Distributing manifestos", "Offering gifts to voters"],
+          "correctIndex": 1
+        },
+        {
+          "question": "Are exit polls allowed during the voting period?",
+          "options": ["Yes, anytime", "No — banned from start of polling until 30 min after last phase", "Only on TV"],
+          "correctIndex": 1
+        }
+      ],
+      "allowedTitle": "Allowed",
+      "prohibitedTitle": "Prohibited",
+      "allowed": ["Hold public rallies", "Distribute manifestos", "Door-to-door canvassing", "Publish advertisements"],
+      "prohibited": ["Offer cash or gifts for votes", "Use religion to seek votes", "Organize transport to polling booth", "Intimidate voters"]
+    },
+    "7": {
+      "title": "Voting Day",
+      "subtitle": "Your moment has arrived.",
+      "body": "Here is exactly what happens inside the polling booth, step by step.",
+      "quiz": [
+        {
+          "question": "Which finger is marked with indelible ink after voting?",
+          "options": ["Right index finger", "Left index finger", "Right thumb"],
+          "correctIndex": 1
+        },
+        {
+          "question": "Which register does the 2nd Polling Official record your signature on?",
+          "options": ["Form 6", "Form 17A", "Form 8"],
+          "correctIndex": 1
+        },
+        {
+          "question": "Is a mobile phone allowed inside the voting compartment?",
+          "options": ["Yes, for taking a photo", "No — strictly prohibited", "Only in silent mode"],
+          "correctIndex": 1
+        },
+        {
+          "question": "Under Rule 49N, who can accompany a visually impaired voter inside the booth?",
+          "options": ["Any stranger", "An adult companion of their choice", "Only a government official"],
+          "correctIndex": 1
+        }
+      ],
+      "boothSteps": [
+        { "official": "1st Polling Official", "action": "Verifies your identity against the electoral roll." },
+        { "official": "2nd Polling Official", "action": "Marks left index finger with indelible ink and records your signature on Form 17A." },
+        { "official": "3rd Polling Official", "action": "Collects your voter slip, checks inked finger, and activates the EVM for your vote." }
+      ],
+      "checklistTitle": "Pre-Departure Checklist",
+      "checklist": [
+        { "label": "Voter ID / Aadhaar / Passport" },
+        { "label": "Voter slip from BLO" },
+        { "label": "Leave mobile phone at home" },
+        { "label": "Check polling station location" }
+      ]
+    },
+    "8": {
+      "title": "Counting & Results",
+      "subtitle": "Every vote is verified.",
+      "body": "Counting begins at 8:00 AM under the strict supervision of the Returning Officer. Postal ballots are counted first, then EVM votes 30 minutes later.",
+      "quiz": [
+        {
+          "question": "How many randomly selected VVPAT slips are manually counted per assembly segment?",
+          "options": ["3", "5", "10"],
+          "correctIndex": 1
+        },
+        {
+          "question": "At what time does counting generally begin?",
+          "options": ["6:00 AM", "8:00 AM", "10:00 AM"],
+          "correctIndex": 1
+        },
+        {
+          "question": "Which type of ballots are counted first?",
+          "options": ["EVM votes", "Postal ballots (Rule 54A)", "VVPAT slips"],
+          "correctIndex": 1
+        }
+      ],
+      "countingSteps": [
+        { "time": "8:00 AM", "event": "Counting begins under Returning Officer supervision." },
+        { "time": "8:00 AM", "event": "Postal Ballots counted first (Rule 54A)." },
+        { "time": "8:30 AM", "event": "EVM votes counting begins (30 min after postal)." },
+        { "time": "Ongoing", "event": "VVPAT slips from 5 random booths manually verified per segment." }
+      ],
+      "vvpatTitle": "VVPAT Safeguard",
+      "vvpatDesc": "The Supreme Court mandates that printed VVPAT slips from 5 randomly selected polling stations in every assembly segment are manually counted and matched against EVM results to ensure accuracy."
+    },
+    "9": {
+      "title": "Government Formation",
+      "subtitle": "From votes to governance.",
+      "body": "Once all votes are counted, the party with the most winners forms the government. In the Lok Sabha, there are 543 seats, so a party needs 272 seats to win an absolute majority.",
+      "quiz": [
+        {
+          "question": "How many seats are there in the Lok Sabha?",
+          "options": ["250", "543", "545"],
+          "correctIndex": 1
+        },
+        {
+          "question": "How many seats does a party need for an absolute majority in the Lok Sabha?",
+          "options": ["200", "272", "300"],
+          "correctIndex": 1
+        },
+        {
+          "question": "What is a Hung Parliament?",
+          "options": ["When a party wins more than 272 seats", "When no single party wins an absolute majority", "When elections are cancelled"],
+          "correctIndex": 1
+        },
+        {
+          "question": "Whose guidelines does the President follow when inviting a party to form government after a Hung Parliament?",
+          "options": ["Punchhi Commission", "Sarkaria Commission", "Finance Commission"],
+          "correctIndex": 1
+        }
+      ],
+      "majorityTitle": "seats needed for absolute majority out of 543",
+      "hungTitle": "What is a Hung Parliament?",
+      "hungDesc": "When no single party wins 272 seats, it is called a Hung Parliament.",
+      "presidentialTitle": "The President follows Sarkaria Commission guidelines:",
+      "presidentialSteps": [
+        "Invite the pre-election alliance with the most seats first.",
+        "If no alliance, invite the single largest party.",
+        "The invited party must prove majority on the floor of the House."
+      ]
+    }
+  },
+  "simulator": {
+    "title": "Mock Voting Simulator",
+    "subtitle": "Experience the exact EVM voting process.",
+    "pressBallot": "Press Ballot to Begin",
+    "chooseCandidate": "Choose your candidate",
+    "nota": "NOTA — None of the Above",
+    "vvpatTitle": "VVPAT Verification",
+    "vvpatDesc": "Your slip is visible for 7 seconds, then drops into the sealed box.",
+    "complete": "Vote Cast Successfully!",
+    "noInternet": "No Wi-Fi, Bluetooth, or internet capability.",
+    "otp": "One-time programmable chip — cannot be rewritten.",
+    "rateLimit": "Maximum 4 votes per minute to prevent booth capturing.",
+    "noPower": "Runs on ordinary batteries — no electricity needed."
+  },
+  "chatbot": {
+    "title": "Chunav Mitra",
+    "subtitle": "Your election guide",
+    "placeholder": "Ask me anything about elections...",
+    "neutralResponse": "As an educational assistant guided by Election Commission of India principles, I remain strictly neutral. I cannot recommend any political party or candidate."
+  },
+  "verify": {
+    "title": "Verify Your Voter ID",
+    "epicLabel": "Enter your EPIC Number",
+    "epicPlaceholder": "e.g. ABC1234567",
+    "constituency": "Constituency",
+    "pollingStation": "Polling Station",
+    "status": "Registration Status",
+    "registered": "Registered",
+    "notFound": "Voter not found. Please check your EPIC number."
+  },
+  "badges": {
+    "firstVote": "First Vote",
+    "quizChampion": "Quiz Champion",
+    "democracyScholar": "Democracy Scholar",
+    "simulatorPro": "Simulator Pro"
+  },
+  "landing": {
+    "badge": "Powered by Election Commission of India Guidelines",
+    "heroTitle": "Your Guide to",
+    "heroTitleHighlight": "Indian Elections",
+    "heroSubtitle": "Understand the world's largest democracy. Learn how to register, vote, and make your voice count — in your language, at your pace.",
+    "ctaPrimary": "Start My Journey",
+    "ctaSimulator": "Try Vote Simulator",
+    "statsVoters": "642M+ Voters",
+    "statsVotersDesc": "participated in 2024 elections",
+    "statsSteps": "9 Easy Steps",
+    "statsStepsDesc": "to understand the full process",
+    "statsLanguages": "3 Languages",
+    "statsLanguagesDesc": "English, Hindi, Gujarati",
+    "featuresTitle": "Everything You Need to Vote Confidently",
+    "featuresSubtitle": "Built for every Indian citizen — students, first-time voters, and senior citizens alike.",
+    "feature1Title": "9-Step Electoral Journey",
+    "feature1Desc": "From understanding democracy to government formation — a guided, gamified learning path.",
+    "feature2Title": "EVM Vote Simulator",
+    "feature2Desc": "Practice the exact voting process with a high-fidelity Electronic Voting Machine simulation.",
+    "feature3Title": "AI Chatbot — Chunav Mitra",
+    "feature3Desc": "Ask anything about elections. Strictly neutral, always citing official ECI guidelines.",
+    "feature4Title": "Multilingual Support",
+    "feature4Desc": "Available in English, Hindi, and Gujarati with voice narration for low-literacy users.",
+    "feature5Title": "Voter ID Verification",
+    "feature5Desc": "Check your registration status and find your polling station instantly.",
+    "feature6Title": "Accessibility First",
+    "feature6Desc": "Large text, high contrast, and voice narration for elderly and differently-abled citizens.",
+    "howTitle": "How It Works",
+    "howSubtitle": "Three simple steps to become an informed voter.",
+    "how1Title": "Choose Your Profile",
+    "how1Desc": "Tell us if you're a student, first-time voter, or general citizen. We personalize your experience.",
+    "how2Title": "Learn & Earn Points",
+    "how2Desc": "Complete 9 interactive steps, answer quizzes, and earn badges as you master the electoral process.",
+    "how3Title": "Vote with Confidence",
+    "how3Desc": "Practice on the EVM simulator, verify your voter ID, and head to the polls fully prepared.",
+    "personaTitle": "Choose Your Path",
+    "personaSubtitle": "We'll personalize your journey based on your profile.",
+    "footerTagline": "Empowering every Indian to exercise their democratic right.",
+    "footerEci": "Aligned with ECI SVEEP Guidelines",
+    "footerNeutral": "Strictly Politically Neutral",
+    "footerFree": "Free & Open Access"
+  }
+}
