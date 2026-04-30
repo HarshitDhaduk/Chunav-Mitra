@@ -34,7 +34,7 @@ function Navbar() {
           {["en", "hi", "gu"].map((l) => (
             <button
               key={l}
-              onClick={() => router.push(`/${l}`)}
+              onClick={() => router.push(`/${l}` as any)}
               className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
                 locale === l
                   ? "bg-orange-500 text-white"
@@ -112,14 +112,14 @@ function HeroSection() {
           className="flex flex-col items-center justify-center gap-3 sm:flex-row"
         >
           <button
-            onClick={() => router.push(`/${locale}/journey/1`)}
+            onClick={() => router.push(`/${locale}/journey/1` as any)}
             className="group flex min-h-[52px] items-center gap-2 rounded-2xl bg-orange-500 px-8 py-3 font-bold text-white shadow-lg shadow-orange-500/30 transition-all hover:bg-orange-600 hover:shadow-orange-500/50"
           >
             {t("ctaPrimary")}
             <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
           </button>
           <button
-            onClick={() => router.push(`/${locale}/simulator`)}
+            onClick={() => router.push(`/${locale}/simulator` as any)}
             className="flex min-h-[52px] items-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-8 py-3 font-semibold text-white backdrop-blur transition-all hover:bg-white/20"
           >
             <Cpu size={18} />
@@ -280,7 +280,7 @@ function PersonaSelectorSection() {
   function handleSelect(persona: Persona) {
     reset(); // Reset scores/progress when starting fresh
     setPersona(persona);
-    router.push(`/${locale}/journey/1`);
+    router.push(`/${locale}/journey/1` as any);
   }
 
   return (
