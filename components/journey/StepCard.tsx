@@ -69,11 +69,13 @@ export function StepCard({ stepNumber, totalSteps }: Props) {
   }
 
   function handleQuizAnswered(correct: boolean, autoAdvance?: boolean) {
-    setQuizAnswered(correct);
+    setQuizAnswered(true); // Any answer attempt counts as answered
     if (correct && autoAdvance) {
       advance();
     }
   }
+
+  const d = useTranslations("journey.dialogs");
 
   return (
     <>
@@ -125,7 +127,7 @@ export function StepCard({ stepNumber, totalSteps }: Props) {
                   : "bg-slate-400 hover:bg-slate-500"
               }`}
             >
-              {isLastStep ? "Finish & Try Simulator" : t("next")}
+              {isLastStep ? t("finish") : t("next")}
               <ChevronRight size={16} />
             </button>
           </div>
@@ -136,10 +138,10 @@ export function StepCard({ stepNumber, totalSteps }: Props) {
       <ConfirmDialog
         open={showSkipConfirm}
         variant="warning"
-        title="Skip the quiz?"
-        description="You'll miss out on points for this step. You can always come back and answer it later."
-        confirmLabel="Skip & Continue"
-        cancelLabel="Answer Quiz"
+        title={d("skip.title")}
+        description={d("skip.description")}
+        confirmLabel={d("skip.confirm")}
+        cancelLabel={d("skip.cancel")}
         onConfirm={handleSkipConfirmed}
         onCancel={() => setShowSkipConfirm(false)}
       />
@@ -148,14 +150,14 @@ export function StepCard({ stepNumber, totalSteps }: Props) {
       <ConfirmDialog
         open={showCompleteConfirm}
         variant="success"
-        title={isLastStep ? "Complete the journey?" : "Move to next step?"}
+        title={isLastStep ? d("complete.titleLast") : d("complete.title")}
         description={
           isLastStep
-            ? "Amazing! You've completed all 9 steps. Ready to try the EVM Simulator?"
-            : `Great job on Step ${stepNumber}! Ready to move on to Step ${stepNumber + 1}?`
+            ? d("complete.descriptionLast")
+            : d("complete.description", { current: stepNumber, next: stepNumber + 1 })
         }
-        confirmLabel={isLastStep ? "Try Simulator 🗳️" : "Next Step →"}
-        cancelLabel="Review Step"
+        confirmLabel={isLastStep ? d("complete.confirmLast") : d("complete.confirm")}
+        cancelLabel={d("complete.cancel")}
         onConfirm={handleCompleteConfirmed}
         onCancel={() => setShowCompleteConfirm(false)}
       />

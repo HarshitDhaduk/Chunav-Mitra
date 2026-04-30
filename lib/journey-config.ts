@@ -16,12 +16,12 @@ export type StepConfig = {
 
 export const STEPS_CONFIG: StepConfig[] = [
   { id: 1, emoji: "🏛️", maxPossibleXp: 80 },
-  { id: 2, emoji: "🗳️", maxPossibleXp: 90 },
-  { id: 3, emoji: "📋", maxPossibleXp: 105 },
-  { id: 4, emoji: "📅", maxPossibleXp: 155 },
+  { id: 2, emoji: "🗳️", maxPossibleXp: 140 },
+  { id: 3, emoji: "📋", maxPossibleXp: 155 },
+  { id: 4, emoji: "📅", maxPossibleXp: 205 },
   { id: 5, emoji: "📝", maxPossibleXp: 90 },
   { id: 6, emoji: "📣", maxPossibleXp: 105 },
-  { id: 7, emoji: "✍️", maxPossibleXp: 155 },
+  { id: 7, emoji: "✍️", maxPossibleXp: 205 },
   { id: 8, emoji: "🔢", maxPossibleXp: 115 },
   { id: 9, emoji: "🏅", maxPossibleXp: 155 },
 ];

@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, CheckCircle, RotateCcw } from "lucide-react";
+import { ExternalLink, CheckCircle, RotateCcw, Sparkles, AlertTriangle } from "lucide-react";
 import { GamifiedQuiz } from "../GamifiedQuiz";
 import { VoiceNarration } from "@/components/accessibility/VoiceNarration";
+import { useJourneyStore } from "@/context/journeyStore";
 
 type Props = { onAnswered: (correct: boolean) => void };
 
@@ -14,15 +15,23 @@ type FlowState = "q1" | "q2" | "result-form8" | "result-form6a" | "result-form6"
 
 export function Step3Registration({ onAnswered }: Props) {
   const t = useTranslations("steps.3");
+  const { awardBonus, completedBonuses } = useJourneyStore();
   const [flow, setFlow] = useState<FlowState>("q1");
 
   const body = t("body");
   const isResult = flow.startsWith("result-");
+  const alreadyAwarded = completedBonuses[3];
 
   // Fetch localized form info
   const forms = t.raw("forms");
   const resultKey = flow.replace("result-", "");
   const formInfo = isResult ? forms[resultKey] : null;
+
+  useEffect(() => {
+    if (isResult && !alreadyAwarded) {
+      awardBonus(3, 50);
+    }
+  }, [isResult, alreadyAwarded, awardBonus]);
 
   // Visual config for tags
   const TAG_COLORS: Record<string, string> = {
@@ -44,7 +53,13 @@ export function Step3Registration({ onAnswered }: Props) {
       <p className="leading-relaxed">{body}</p>
 
       {/* ── Interactive form guide ── */}
-      <section className="rounded-2xl border-2 border-slate-100 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-800/40">
+      <section className="relative overflow-hidden rounded-2xl border-2 border-slate-100 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-800/40">
+        {!isResult && !alreadyAwarded && (
+          <div className="absolute top-2 right-2 flex items-center gap-1 rounded-full bg-orange-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-sm animate-bounce">
+            <Sparkles size={10} /> {t("findFormPoints")}
+          </div>
+        )}
+
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-semibold text-slate-800 dark:text-white">📋 {t("findForm")}</h3>
           {flow !== "q1" && (
@@ -83,6 +98,11 @@ export function Step3Registration({ onAnswered }: Props) {
                   onClick={() => setFlow("q2")}
                 />
               </div>
+              {!alreadyAwarded && (
+                <p className="flex items-center gap-1.5 text-[10px] font-medium text-orange-600 italic">
+                  <AlertTriangle size={10} /> {t("warningPoints")}
+                </p>
+              )}
             </motion.div>
           )}
 
@@ -158,12 +178,22 @@ export function Step3Registration({ onAnswered }: Props) {
                 </ul>
               </div>
 
+              {/* Success Badge */}
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                className="flex items-center gap-2 rounded-xl bg-green-500/10 border border-green-500/20 p-3 text-xs font-bold text-green-700 dark:text-green-400"
+              >
+                <Sparkles size={14} />
+                {t("missionComplete")}
+              </motion.div>
+
               {/* CTA */}
               <a
                 href="https://voters.eci.gov.in"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-orange-500 px-4 py-2 text-sm font-semibold text-white hover:bg-orange-600"
+                className="flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-orange-500 px-4 py-2 text-sm font-semibold text-white hover:bg-orange-600 shadow-md transition-all hover:shadow-lg active:scale-95"
               >
                 {t("applyCta")} <ExternalLink size={14} />
               </a>
@@ -209,12 +239,13 @@ function OptionButton({
   onClick: () => void;
 }) {
   return (
-    <button
+    <motion.button
+      whileTap={{ scale: 0.95 }}
       onClick={onClick}
       className="flex min-h-[52px] items-center justify-center gap-2 rounded-xl border-2 border-slate-200 bg-white px-4 text-sm font-semibold text-slate-700 transition-all hover:border-orange-400 hover:bg-orange-50 hover:text-orange-700 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-200 dark:hover:border-orange-500 dark:hover:bg-orange-900/20 dark:hover:text-orange-300"
     >
       <span>{emoji}</span>
       {label}
-    </button>
+    </motion.button>
   );
 }

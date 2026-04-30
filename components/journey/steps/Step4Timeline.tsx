@@ -1,18 +1,21 @@
-"use client";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Sparkles, AlertTriangle, Info } from "lucide-react";
 import { GamifiedQuiz } from "../GamifiedQuiz";
 import { VoiceNarration } from "@/components/accessibility/VoiceNarration";
+import { useJourneyStore } from "@/context/journeyStore";
 
 type Props = { onAnswered: (correct: boolean) => void };
 
 export function Step4Timeline({ onAnswered }: Props) {
   const t = useTranslations("steps.4");
+  const { awardBonus, completedBonuses } = useJourneyStore();
   const [expanded, setExpanded] = useState<number | null>(null);
+  const [viewedPhases, setViewedPhases] = useState<Set<number>>(new Set());
+  
   const body = t("body");
+  const alreadyAwarded = completedBonuses[4];
 
   // Load localized arrays
   const phases = t.raw("phases") as Array<{
@@ -23,7 +26,13 @@ export function Step4Timeline({ onAnswered }: Props) {
 
   const mccRules = t.raw("mccRules") as string[];
 
-  // Visual config for phases (since these aren't localized)
+  useEffect(() => {
+    if (viewedPhases.size === phases.length && !alreadyAwarded) {
+      awardBonus(4, 50);
+    }
+  }, [viewedPhases.size, phases.length, alreadyAwarded, awardBonus]);
+
+  // Visual config for phases
   const phaseStyles = [
     { icon: "📢", color: "bg-blue-500", lightColor: "bg-blue-50 border-blue-200 dark:bg-blue-900/20 dark:border-blue-800", textColor: "text-blue-700 dark:text-blue-400" },
     { icon: "📋", color: "bg-orange-500", lightColor: "bg-orange-50 border-orange-200 dark:bg-orange-900/20 dark:border-orange-800", textColor: "text-orange-700 dark:text-orange-400" },
@@ -37,12 +46,15 @@ export function Step4Timeline({ onAnswered }: Props) {
 
   function toggle(i: number) {
     setExpanded((prev) => (prev === i ? null : i));
+    if (!viewedPhases.has(i)) {
+      const next = new Set(viewedPhases);
+      next.add(i);
+      setViewedPhases(next);
+    }
   }
 
   return (
     <article className="space-y-8">
-
-      {/* Header */}
       <div className="flex items-start justify-between">
         <div>
           <h2 className="text-2xl font-bold">{t("title")}</h2>
@@ -54,8 +66,22 @@ export function Step4Timeline({ onAnswered }: Props) {
       <p className="leading-relaxed text-slate-600 dark:text-slate-300">{body}</p>
 
       {/* ── Vertical timeline ── */}
-      <section>
-        <h3 className="mb-4 font-semibold text-slate-800 dark:text-white">{t("timelineTitle")}</h3>
+      <section className="relative overflow-hidden rounded-2xl border-2 border-slate-100 bg-slate-50/50 p-5 dark:border-slate-700 dark:bg-slate-800/40">
+        {!alreadyAwarded && (
+          <div className="absolute top-2 right-2 flex items-center gap-1 rounded-full bg-orange-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-sm animate-bounce z-10">
+            <Sparkles size={10} /> {t("readPoints")}
+          </div>
+        )}
+
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="font-semibold text-slate-800 dark:text-white flex items-center gap-2">
+            <Info size={16} className="text-orange-500" />
+            {t("timelineTitle")}
+          </h3>
+          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+            {viewedPhases.size} / {phases.length} Explored
+          </span>
+        </div>
 
         <div className="space-y-0">
           {phases.map((phase, i) => {
@@ -71,36 +97,35 @@ export function Step4Timeline({ onAnswered }: Props) {
                 transition={{ delay: i * 0.07 }}
                 className="flex gap-0"
               >
-                {/* Left rail: dot + line */}
                 <div className="flex flex-col items-center">
-                  {/* Dot */}
                   <div className={`relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${style.color} text-base shadow-md ring-4 ring-white dark:ring-slate-950`}>
                     {style.icon}
                   </div>
-                  {/* Connector line — hidden on last item */}
                   {!isLast && (
                     <div className="w-0.5 flex-1 bg-slate-200 dark:bg-slate-700" style={{ minHeight: "1.5rem" }} />
                   )}
                 </div>
 
-                {/* Right content */}
                 <div className={`ml-4 pb-6 flex-1 min-w-0 ${isLast ? "pb-0" : ""}`}>
                   <button
                     onClick={() => toggle(i)}
                     className={`w-full rounded-2xl border-2 p-4 text-left transition-all ${
                       isOpen
                         ? style.lightColor
-                        : "border-slate-200 bg-slate-50 hover:border-slate-300 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800/60 dark:hover:border-slate-500 dark:hover:bg-slate-700"
+                        : "border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800/60 dark:hover:border-slate-500 dark:hover:bg-slate-700"
                     }`}
                     aria-expanded={isOpen}
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div className="min-w-0">
-                        <p className={`font-semibold text-sm leading-snug ${
-                          isOpen ? style.textColor : "text-slate-800 dark:text-white"
-                        }`}>
-                          {phase.phase}
-                        </p>
+                        <div className="flex items-center gap-2">
+                          <p className={`font-semibold text-sm leading-snug ${
+                            isOpen ? style.textColor : "text-slate-800 dark:text-white"
+                          }`}>
+                            {phase.phase}
+                          </p>
+                          {viewedPhases.has(i) && <CheckCircle size={12} className="text-green-500" />}
+                        </div>
                         <p className="mt-1 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
                           {phase.summary}
                         </p>
@@ -115,7 +140,6 @@ export function Step4Timeline({ onAnswered }: Props) {
                     </div>
                   </button>
 
-                  {/* Expanded detail panel */}
                   <AnimatePresence>
                     {isOpen && (
                       <motion.div
@@ -143,6 +167,30 @@ export function Step4Timeline({ onAnswered }: Props) {
             );
           })}
         </div>
+
+        {/* Gamified Footer */}
+        <AnimatePresence>
+          {viewedPhases.size === phases.length && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-4 flex items-center gap-2 rounded-xl bg-green-500/10 border border-green-500/20 p-3 text-sm font-bold text-green-700 dark:text-green-400"
+            >
+              <Sparkles size={16} />
+              {t("missionComplete")}
+            </motion.div>
+          )}
+
+          {viewedPhases.size < phases.length && !alreadyAwarded && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="mt-4 flex items-center gap-1.5 text-xs font-medium text-orange-600/80 italic"
+            >
+              <AlertTriangle size={12} /> {t("warningPoints")}
+            </motion.p>
+          )}
+        </AnimatePresence>
       </section>
 
       {/* ── MCC Quick Rules ── */}
@@ -207,5 +255,23 @@ export function Step4Timeline({ onAnswered }: Props) {
         onAnswered={onAnswered}
       />
     </article>
+  );
+}
+
+function CheckCircle({ size, className }: { size: number; className?: string }) {
+  return (
+    <svg 
+      width={size} 
+      height={size} 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      strokeWidth="3" 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      className={className}
+    >
+      <path d="M20 6L9 17L4 12" />
+    </svg>
   );
 }

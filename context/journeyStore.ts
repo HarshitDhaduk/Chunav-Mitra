@@ -14,16 +14,20 @@ export type Badge = "firstVote" | "quizChampion" | "democracyScholar" | "simulat
 type JourneyStore = {
   persona: Persona | null;
   currentStep: number;
-  stepXp: Record<number, number>; // XP earned per step
+  stepXp: Record<number, number>;
   totalXp: number;
   level: number;
   badges: Badge[];
+  completedBonuses: Record<number, boolean>;
+  stepData: Record<number, any>; // Store interactive state per step (e.g., checklist selections)
   accessibilityPrefs: AccessibilityPrefs;
   locale: string;
 
   setPersona: (persona: Persona) => void;
   setStep: (step: number) => void;
   addXp: (step: number, amount: number) => void;
+  awardBonus: (step: number, amount: number) => void;
+  setStepData: (step: number, data: any) => void;
   addBadge: (badge: Badge) => void;
   setAccessibilityPref: (key: keyof AccessibilityPrefs, value: boolean) => void;
   setLocale: (locale: string) => void;
@@ -39,18 +43,25 @@ const initialState = {
   totalXp: 0,
   level: 1,
   badges: [] as Badge[],
+  completedBonuses: {},
+  stepData: {},
   accessibilityPrefs: { largeText: false, highContrast: false, voiceOn: false },
   locale: "en",
 };
 
 export const useJourneyStore = create<JourneyStore>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       ...initialState,
 
       setPersona: (persona) => set({ persona }),
 
       setStep: (step) => set({ currentStep: step }),
+
+      setStepData: (step, data) =>
+        set((state) => ({
+          stepData: { ...state.stepData, [step]: data },
+        })),
 
       addXp: (step, amount) =>
         set((state) => {
@@ -65,6 +76,16 @@ export const useJourneyStore = create<JourneyStore>()(
             level: newLevel,
           };
         }),
+
+      awardBonus: (step, amount) => {
+        const state = get();
+        if (state.completedBonuses[step]) return; // Already awarded
+
+        set((state) => ({
+          completedBonuses: { ...state.completedBonuses, [step]: true }
+        }));
+        state.addXp(step, amount);
+      },
 
       addBadge: (badge) =>
         set((state) => ({

@@ -7,7 +7,8 @@
     "close": "Close",
     "loading": "Loading...",
     "verify": "Verify",
-    "points": "pts"
+    "points": "pts",
+    "finish": "Finish & Try Simulator"
   },
   "nav": {
     "home": "Home",
@@ -51,6 +52,29 @@
       "7": "Voting Day",
       "8": "Counting & Results",
       "9": "Government Formation"
+    },
+    "dialogs": {
+      "skip": {
+        "title": "Skip the quiz?",
+        "description": "You'll miss out on points for this step. You can always come back and answer it later.",
+        "confirm": "Skip & Continue",
+        "cancel": "Answer Quiz"
+      },
+      "complete": {
+        "title": "Move to next step?",
+        "titleLast": "Complete the journey?",
+        "description": "Great job on Step {current}! Ready to move on to Step {next}?",
+        "descriptionLast": "Amazing! You've completed all 9 steps. Ready to try the EVM Simulator?",
+        "confirm": "Next Step →",
+        "confirmLast": "Try Simulator 🗳️",
+        "cancel": "Review Step"
+      },
+      "leave": {
+        "title": "Return to Home?",
+        "description": "Are you sure you want to leave? Your current progress might be reset.",
+        "confirm": "Yes, Go Home",
+        "cancel": "Stay Here"
+      }
     }
   },
   "steps": {
@@ -81,7 +105,12 @@
       "subtitle": "Every citizen has an equal voice.",
       "body": "Every Indian citizen who is 18 years old has the power to vote. It does not matter what your gender, religion, or financial status is. One person equals one vote.",
       "ageCalcLabel": "Enter your date of birth",
+      "checkButton": "Check Eligibility",
+      "dobPoints": "+50 XP for checking!",
+      "dobError": "Please enter your date of birth before checking eligibility.",
+      "warningPoints": "Wait! You'll lose potential points if you don't check your eligibility first!",
       "alreadyEligible": "You are already eligible to vote!",
+      "eligibleOn": "You become eligible on {date}",
       "quiz": [
         {
           "question": "What is the minimum voting age in India?",
@@ -112,6 +141,9 @@
       "form6a": "You need Form 6A — for NRI voters.",
       "form8": "You need Form 8 — to update address or correct details.",
       "findForm": "Find Your Form",
+      "findFormPoints": "+50 XP for finding your form!",
+      "warningPoints": "Wait! Don't skip finding your form — you'll lose potential points!",
+      "missionComplete": "Mission Accomplished! +50 XP Earned",
       "startOver": "Start over",
       "docsRequired": "Documents Required",
       "applyCta": "Apply on ECI Voters Portal",
@@ -159,6 +191,9 @@
     "4": {
       "title": "Election Announcement & Timeline",
       "subtitle": "The countdown begins.",
+      "readPoints": "+50 XP for exploring the timeline!",
+      "warningPoints": "Wait! Explore the timeline to earn extra points!",
+      "missionComplete": "Timeline Explored! +50 XP Earned",
       "body": "Once the election dates are announced, strict rules apply. The government cannot announce new schemes. Political parties cannot use religion to ask for votes.",
       "quiz": [
         {
@@ -346,12 +381,21 @@
         { "official": "2nd Polling Official", "action": "Marks left index finger with indelible ink and records your signature on Form 17A." },
         { "official": "3rd Polling Official", "action": "Collects your voter slip, checks inked finger, and activates the EVM for your vote." }
       ],
-      "checklistTitle": "Pre-Departure Checklist",
+      "checklistTitle": "Items to Carry (Select only allowed items)",
+      "verifyButton": "Verify My Bag",
+      "wrongSelection": "Wait! You have packed prohibited items or missed required ones.",
+      "successTitle": "Bag Verified!",
+      "bonusPoints": "+50 XP for packing correctly!",
+      "warningPoints": "Wait! Pack only what's allowed to earn points!",
+      "prohibitedError": "Don't carry prohibited items!",
+      "missionComplete": "Ready for Polling! +50 XP Earned",
       "checklist": [
         { "label": "Voter ID / Aadhaar / Passport" },
         { "label": "Voter slip from BLO" },
-        { "label": "Leave mobile phone at home" },
-        { "label": "Check polling station location" }
+        { "label": "Mobile Phone / Camera" },
+        { "label": "Check polling station location" },
+        { "label": "Political Party Badge" },
+        { "label": "Campaign Leaflets" }
       ]
     },
     "8": {
