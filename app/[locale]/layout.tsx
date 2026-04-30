@@ -12,6 +12,13 @@ const inter = Inter({ subsets: ["latin"], display: "swap" });
 export const metadata: Metadata = {
   title: "Chunav Mitra — India Election Guide",
   description: "Your AI-powered civic education assistant for Indian elections.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "32x32" },
+    ],
+    apple: "/logo.png",
+  },
 };
 
 export function generateStaticParams() {

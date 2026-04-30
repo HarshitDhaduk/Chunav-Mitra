@@ -33,8 +33,8 @@ export function HomeButton({ asLogo = false }: Props) {
           className="flex items-center gap-2.5 text-left transition-opacity hover:opacity-80"
           aria-label={t("title")}
         >
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-orange-100 text-xl dark:bg-orange-900/30">
-            🗳️
+          <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-white shadow-sm transition-transform group-hover:scale-105 dark:border-slate-700 dark:bg-slate-900">
+            <img src="/logo.png" alt="Logo" className="h-full w-full object-cover" />
           </div>
           <div>
             <p className="text-sm font-bold leading-tight text-slate-900 dark:text-white">

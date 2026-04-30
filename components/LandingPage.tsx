@@ -26,8 +26,10 @@ function Navbar() {
   return (
     <nav className="fixed top-0 z-50 w-full border-b border-white/10 bg-white/80 backdrop-blur-md dark:bg-slate-900/80">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-        <div className="flex items-center gap-2">
-          <span className="text-2xl">🗳️</span>
+        <div className="flex items-center gap-3">
+          <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900">
+            <img src="/logo.png" alt="Logo" className="h-full w-full object-cover" />
+          </div>
           <span className="font-bold text-slate-900 dark:text-white">Chunav Mitra</span>
         </div>
         <div className="flex items-center gap-2">
@@ -353,8 +355,10 @@ function Footer() {
     <footer className="border-t bg-white py-10 dark:border-slate-800 dark:bg-slate-900">
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex flex-col items-center gap-6 text-center">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl">🗳️</span>
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900">
+              <img src="/logo.png" alt="Logo" className="h-full w-full object-cover" />
+            </div>
             <span className="text-lg font-bold text-slate-900 dark:text-white">Chunav Mitra</span>
           </div>
           <p className="max-w-md text-sm text-slate-500 dark:text-slate-400">{t("footerTagline")}</p>
