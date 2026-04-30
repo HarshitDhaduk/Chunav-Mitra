@@ -1,6 +1,5 @@
 import { HomeButton } from "@/components/journey/HomeButton";
 import { AccessibilityToolbar } from "@/components/accessibility/AccessibilityToolbar";
-import { ChunавMitraFAB } from "@/components/chatbot/ChunавMitraFAB";
 
 export default function SimulatorLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -30,8 +29,6 @@ export default function SimulatorLayout({ children }: { children: React.ReactNod
           {children}
         </div>
       </main>
-
-      <ChunавMitraFAB />
     </div>
   );
 }

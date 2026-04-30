@@ -4,6 +4,7 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Inter } from "next/font/google";
 import { locales, type Locale } from "@/i18n";
+import { ChunавMitraFAB } from "@/components/chatbot/ChunавMitraFAB";
 import "@/app/globals.css";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });

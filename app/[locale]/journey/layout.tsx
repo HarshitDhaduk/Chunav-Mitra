@@ -1,7 +1,6 @@
 import { JourneySidebar } from "@/components/journey/JourneySidebar";
 import { HomeButton } from "@/components/journey/HomeButton";
 import { AccessibilityToolbar } from "@/components/accessibility/AccessibilityToolbar";
-import { ChunавMitraFAB } from "@/components/chatbot/ChunавMitraFAB";
 
 export default function JourneyLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -56,8 +55,6 @@ export default function JourneyLayout({ children }: { children: React.ReactNode 
           </div>
         </main>
       </div>
-
-      <ChunавMitraFAB />
     </div>
   );
 }
