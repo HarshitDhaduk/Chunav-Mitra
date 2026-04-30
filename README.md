@@ -140,7 +140,7 @@ npm run test:e2e      # Playwright E2E tests
 ### State Management
 
 - Zustand store persisted to localStorage
-- Tracks: persona, currentStep, quizScores, totalPoints, badges, accessibilityPrefs
+- Tracks: persona, currentStep, stepXp, totalXp, level, badges, accessibilityPrefs
 - No prop drilling — global access via `useJourneyStore()`
 
 ### Accessibility

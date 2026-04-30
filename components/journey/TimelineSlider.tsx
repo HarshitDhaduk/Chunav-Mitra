@@ -11,7 +11,7 @@ const TOTAL_STEPS = 9;
 export function TimelineSlider() {
   const t = useTranslations("journey");
   const { step } = useParams<{ step?: string }>();
-  const { totalPoints, currentStep } = useJourneyStore();
+  const { totalXp, currentStep } = useJourneyStore();
   const active = step ? parseInt(step, 10) : currentStep;
 
   return (
@@ -48,7 +48,7 @@ export function TimelineSlider() {
       {/* Points */}
       <div className="flex items-center gap-1 rounded-full bg-yellow-100 px-3 py-1 text-sm font-semibold text-yellow-700">
         <Star size={14} />
-        <span>{totalPoints}</span>
+        <span>{totalXp}</span>
       </div>
 
       <p className="hidden text-xs text-muted-foreground sm:block">
