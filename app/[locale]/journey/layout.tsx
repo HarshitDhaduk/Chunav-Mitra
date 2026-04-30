@@ -11,7 +11,7 @@ export default function JourneyLayout({ children }: { children: React.ReactNode 
       <aside className="hidden w-72 shrink-0 flex-col border-r border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900 lg:flex" style={{ height: "100vh", position: "sticky", top: 0 }}>
 
         {/* Logo — clicking opens home confirm modal */}
-        <div className="shrink-0 border-b border-slate-100 dark:border-slate-800">
+        <div className="shrink-0 border-b border-slate-100 px-6 py-5 dark:border-slate-800">
           <HomeButton asLogo />
         </div>
 
@@ -37,7 +37,7 @@ export default function JourneyLayout({ children }: { children: React.ReactNode 
           </div>
 
           {/* Desktop: breadcrumb */}
-          <div className="hidden text-sm text-slate-500 dark:text-slate-400 lg:block">
+          <div className="hidden text-sm font-medium text-slate-500 dark:text-slate-400 lg:block">
             Electoral Journey
           </div>
 

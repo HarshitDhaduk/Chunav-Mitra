@@ -7,16 +7,11 @@ import { MessageBubble } from "./MessageBubble";
 
 type Message = { role: "user" | "assistant"; content: string };
 
-const SUGGESTIONS = [
-  "How do I register to vote?",
-  "What is NOTA?",
-  "Where is my polling booth?",
-];
-
 type Props = { onClose: () => void };
 
 export function ChatWindow({ onClose }: Props) {
   const t = useTranslations("chatbot");
+  const suggestions = t.raw("suggestions") as string[];
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -84,8 +79,8 @@ export function ChatWindow({ onClose }: Props) {
       <div className="flex-1 space-y-3 overflow-y-auto p-4">
         {messages.length === 0 && (
           <div className="space-y-2">
-            <p className="text-center text-xs text-muted-foreground">Ask me anything about elections</p>
-            {SUGGESTIONS.map((s) => (
+            <p className="text-center text-xs text-muted-foreground">{t("prompt")}</p>
+            {suggestions.map((s) => (
               <button
                 key={s}
                 onClick={() => sendMessage(s)}

@@ -34,6 +34,7 @@ export default async function LocaleLayout({
       <body className={`${inter.className} min-h-screen bg-background text-foreground antialiased`}>
         <NextIntlClientProvider messages={messages}>
           {children}
+          <ChunавMitraFAB />
         </NextIntlClientProvider>
       </body>
     </html>

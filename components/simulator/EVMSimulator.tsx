@@ -78,7 +78,7 @@ export function EVMSimulator() {
 
             {/* Security facts */}
             <div className="rounded-2xl border bg-card p-5 text-left">
-              <h3 className="mb-3 font-semibold">🔒 Why EVMs are Secure</h3>
+              <h3 className="mb-3 font-semibold">🔒 {t("securityTitle")}</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 {(["noPower", "noInternet", "otp", "rateLimit"] as const).map((key) => (
                   <li key={key} className="flex gap-2">
@@ -93,7 +93,7 @@ export function EVMSimulator() {
               onClick={() => { setState("idle"); setSelected(null); }}
               className="min-h-[44px] w-full rounded-xl bg-orange-500 px-4 py-2 font-semibold text-white hover:bg-orange-600"
             >
-              Try Again
+              {t("tryAgain")}
             </button>
           </motion.div>
         )}

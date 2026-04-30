@@ -39,7 +39,7 @@ export function VVPATDisplay({ candidate, onComplete }: Props) {
   return (
     <div className="space-y-4 rounded-2xl border-2 border-gray-300 bg-gray-100 p-6">
       <p className="text-center text-xs font-bold uppercase tracking-widest text-gray-500">
-        VVPAT Machine
+        {t("vvpatMachine")}
       </p>
       <h3 className="text-center font-semibold">{t("vvpatTitle")}</h3>
       <p className="text-center text-sm text-muted-foreground">{t("vvpatDesc")}</p>
@@ -57,7 +57,7 @@ export function VVPATDisplay({ candidate, onComplete }: Props) {
             >
               <span className="text-3xl">{candidate.symbol}</span>
               <span className="text-xs font-bold">{candidate.name}</span>
-              <span className="text-xs text-gray-500">Serial No. {candidate.id}</span>
+              <span className="text-xs text-gray-500">{t("serialNo")} {candidate.id}</span>
             </motion.div>
           )}
         </AnimatePresence>
@@ -71,17 +71,17 @@ export function VVPATDisplay({ candidate, onComplete }: Props) {
           animate={{ scale: 1 }}
           className="text-3xl font-bold text-orange-500"
           aria-live="polite"
-          aria-label={`${secondsLeft} seconds remaining`}
+          aria-label={`${secondsLeft} ${t("secondsRemaining")}`}
         >
           {secondsLeft}
         </motion.span>
-        <p className="text-xs text-gray-500">seconds remaining</p>
+        <p className="text-xs text-gray-500">{t("secondsRemaining")}</p>
       </div>
 
       {/* Sealed box */}
       <div className="flex items-center justify-center gap-2 rounded-xl bg-gray-800 p-3 text-white">
         <span>🔒</span>
-        <span className="text-xs">Sealed Drop Box</span>
+        <span className="text-xs">{t("sealedBox")}</span>
       </div>
     </div>
   );

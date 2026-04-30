@@ -12,7 +12,7 @@ export function BallotingUnit({ candidates, onVote }: Props) {
   return (
     <div className="rounded-2xl border-2 border-gray-300 bg-gray-100 p-6">
       <p className="mb-4 text-center text-xs font-bold uppercase tracking-widest text-gray-500">
-        Balloting Unit
+        {t("ballotingUnit")}
       </p>
       <p className="mb-4 text-center text-sm font-medium">{t("chooseCandidate")}</p>
 

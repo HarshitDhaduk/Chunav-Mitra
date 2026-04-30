@@ -477,12 +477,29 @@
     "noInternet": "No Wi-Fi, Bluetooth, or internet capability.",
     "otp": "One-time programmable chip — cannot be rewritten.",
     "rateLimit": "Maximum 4 votes per minute to prevent booth capturing.",
-    "noPower": "Runs on ordinary batteries — no electricity needed."
+    "noPower": "Runs on ordinary batteries — no electricity needed.",
+    "controlUnit": "Control Unit",
+    "official": "Operated by the 3rd Polling Official",
+    "waiting": "Waiting for voter",
+    "ballotBtn": "BALLOT",
+    "ballotingUnit": "Balloting Unit",
+    "vvpatMachine": "VVPAT Machine",
+    "serialNo": "Serial No.",
+    "secondsRemaining": "seconds remaining",
+    "sealedBox": "Sealed Drop Box",
+    "tryAgain": "Try Again",
+    "securityTitle": "Why EVMs are Secure"
   },
   "chatbot": {
     "title": "Chunav Mitra",
     "subtitle": "Your election guide",
     "placeholder": "Ask me anything about elections...",
+    "prompt": "Ask me anything about elections",
+    "suggestions": [
+      "How do I register to vote?",
+      "What is NOTA?",
+      "Where is my polling booth?"
+    ],
     "neutralResponse": "As an educational assistant guided by Election Commission of India principles, I remain strictly neutral. I cannot recommend any political party or candidate."
   },
   "verify": {
