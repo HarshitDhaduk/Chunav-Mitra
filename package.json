@@ -1,7 +1,13 @@
 {
-  "name": "frontend",
+  "name": "chunav-mitra-frontend",
   "version": "0.1.0",
+  "description": "AI-powered civic education assistant for Indian elections",
+  "author": "Harshit Dhaduk",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HarshitDhaduk/Chunav-Mitra.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

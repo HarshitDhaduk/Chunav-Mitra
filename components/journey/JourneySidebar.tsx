@@ -17,7 +17,7 @@ export function JourneySidebar({ mobile = false }: Props) {
   const active = step ? parseInt(step, 10) : 1;
   
   function goTo(n: number) {
-    router.push(`/${locale}/journey/${n}` as any);
+    router.push(`/${locale}/journey/${n}` as never);
   }
 
   // ── Mobile: horizontal dot strip ─────────────────────────────────────────
@@ -172,7 +172,7 @@ export function JourneySidebar({ mobile = false }: Props) {
         <button
           onClick={() => {
             useJourneyStore.getState().reset();
-            router.push(`/${locale}/journey` as any);
+            router.push(`/${locale}/journey` as never);
           }}
           className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white py-2 text-[11px] font-bold text-slate-400 transition-all hover:border-red-200 hover:bg-red-50 hover:text-red-500 dark:border-slate-700 dark:bg-slate-800 dark:hover:border-red-900 dark:hover:bg-red-900/20"
         >

@@ -45,6 +45,7 @@ export function ChatWindow({ onClose }: Props) {
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
+          // eslint-disable-next-line react-hooks/immutability
           assistantText += decoder.decode(value, { stream: true });
           setMessages((prev) => [
             ...prev.slice(0, -1),

@@ -15,7 +15,7 @@ export function Step7VotingDay({ onAnswered }: Props) {
   // Initialize from persistent store
   const [checked, setChecked] = useState<Set<number>>(() => {
     const saved = stepData[7];
-    return saved ? new Set(saved) : new Set();
+    return Array.isArray(saved) ? new Set(saved as number[]) : new Set();
   });
   
   const [isVerified, setIsVerified] = useState(false);

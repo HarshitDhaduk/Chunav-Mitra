@@ -167,24 +167,22 @@ State machine: `idle → ballot-released → vote-cast → vvpat → complete`
 
 ## Deployment
 
-### Vercel (Recommended)
+### Google Cloud Run (Recommended)
+
+The easiest way to deploy this application is using Google Cloud Run's continuous deployment from a GitHub repository:
+
+1. Connect your GitHub repository to Google Cloud Run.
+2. Select **Dockerfile** as the build type.
+3. Add your `GEMINI_API_KEY` and `ECI_API_KEY` in the "Variables & Secrets" section.
+4. Cloud Run will automatically build and deploy your application on every push to the main branch.
+
+### Manual Docker Deployment
+
+You can also manually build and deploy the optimized standalone Next.js image:
 
 ```bash
-vercel
-```
-
-Set environment variables in Vercel dashboard.
-
-### Docker
-
-```dockerfile
-FROM node:18-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
-RUN npm run build
-CMD ["npm", "start"]
+docker build -t chunav-mitra .
+docker run -p 3000:3000 -e GOOGLE_GENAI_API_KEY=your_key chunav-mitra
 ```
 
 ## Roadmap

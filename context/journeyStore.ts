@@ -19,7 +19,7 @@ type JourneyStore = {
   level: number;
   badges: Badge[];
   completedBonuses: Record<number, boolean>;
-  stepData: Record<number, any>; // Store interactive state per step (e.g., checklist selections)
+  stepData: Record<number, unknown>; // Store interactive state per step (e.g., checklist selections)
   accessibilityPrefs: AccessibilityPrefs;
   locale: string;
 
@@ -27,7 +27,7 @@ type JourneyStore = {
   setStep: (step: number) => void;
   addXp: (step: number, amount: number) => void;
   awardBonus: (step: number, amount: number) => void;
-  setStepData: (step: number, data: any) => void;
+  setStepData: (step: number, data: unknown) => void;
   addBadge: (badge: Badge) => void;
   setAccessibilityPref: (key: keyof AccessibilityPrefs, value: boolean) => void;
   setLocale: (locale: string) => void;

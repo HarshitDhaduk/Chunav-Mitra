@@ -21,7 +21,7 @@ export function HomeButton({ asLogo = false }: Props) {
   function handleConfirm() {
     reset(); // Reset journey on leave
     setOpen(false);
-    router.push(`/${locale}` as any);
+    router.push(`/${locale}` as never);
   }
 
   return (

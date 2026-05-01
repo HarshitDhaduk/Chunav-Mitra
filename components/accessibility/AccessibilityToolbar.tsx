@@ -30,7 +30,7 @@ export function AccessibilityToolbar() {
     // Replace the locale segment in the current path
     const segments = pathname.split("/");
     segments[1] = newLocale;
-    router.push(segments.join("/") as any);
+    router.push(segments.join("/") as never);
   }
 
   return (
