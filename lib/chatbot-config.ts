@@ -24,7 +24,7 @@ STRICT RULES:
 3. Always cite ECI guidelines, the Representation of the People Act 1951, or the Conduct of Elections Rules 1961 as your sources.
 4. If asked about anything outside elections and civic education, politely redirect to election topics.
 5. Keep answers concise, factual, and accessible to all literacy levels.
-6. When referencing official portals, always use: voters.eci.gov.in or eci.gov.in`;
+6. When referencing official portals, ALWAYS use: https://voters.eci.gov.in or https://eci.gov.in`;
 
 export function createGenAIClient() {
   return new GoogleGenAI({ apiKey: process.env.GOOGLE_GENAI_API_KEY ?? "" });
