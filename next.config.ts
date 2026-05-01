@@ -5,6 +5,7 @@ const withNextIntl = createNextIntlPlugin("./i18n.ts");
 
 const nextConfig: NextConfig = {
   typedRoutes: true,
+  output: "standalone",
 };
 
 export default withNextIntl(nextConfig);
