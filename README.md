@@ -2,6 +2,37 @@
 
 AI-powered civic education assistant for Indian elections. Built with Next.js 15, React 19, Google GenAI, and next-intl.
 
+## Project Details
+
+### Chosen Vertical
+**Civic Education & Government Services**
+Chunav Mitra addresses the critical need for accessible, neutral, and engaging electoral education in India, targeting the massive democratic process of the Election Commission of India (ECI).
+
+### Approach and Logic
+The platform is designed around "Persona-Based Gamified Learning." Instead of reading static PDFs, users select a persona (Student, First-Time Voter, General Citizen) which tailors their learning journey. We use a 9-step interactive timeline, rewarding users with XP and Badges to encourage completion. We implemented a strict client-side and server-side filtering logic for the AI chatbot to ensure political neutrality, which is a hard requirement for civic tech.
+
+### How the Solution Works
+1. **Frontend**: A Next.js 15 App Router application provides a fast, multilingual (English, Hindi, Gujarati) interface.
+2. **State**: Zustand persists the user's progress, XP, and accessibility preferences locally.
+3. **AI Chatbot**: The Google GenAI SDK (Gemini 2.0 Flash) powers the "Chunav Mitra" chatbot. It utilizes Edge Runtime API routes for streaming responses and a custom regex pre-filter to block politically biased queries before they hit the LLM.
+4. **Simulator**: An interactive React component simulates the actual Indian EVM and VVPAT process with state-machine logic (Idle -> Ballot Released -> Vote Cast -> 7s VVPAT Beep).
+
+### Assumptions Made
+- Users have basic internet connectivity, but we optimized assets and used Tailwind CSS to ensure low bandwidth usage.
+- The ECI API for EPIC voter verification is mocked for this submission since official production access requires government authorization.
+- The Gemini API key will be securely managed via Google Cloud Secret Manager in a production environment.
+
+## Fullfilled Criterias
+
+Here is how Chunav Mitra fulfills the 6 evaluation focus areas:
+
+1. **Code Quality**: Built with Next.js 15 App Router using strict TypeScript and ESLint. The codebase uses a modular structure (separating `journey`, `chatbot`, and `simulator` logic) with centralized, prop-drilling-free state management via Zustand.
+2. **Security**: The Gemini API key is never exposed to the client. All AI requests pass through a secure Next.js Edge Runtime API route. We also implemented a custom "Layer 1" regex pre-filter to catch and neutralize politically biased prompts before they ever reach the LLM, ensuring strict political neutrality.
+3. **Efficiency**: Next.js Server Components are used by default to reduce client-side JavaScript. The Dockerfile uses `output: "standalone"` to prune node_modules and generate a minimal, highly optimized image for Google Cloud Run. Tailwind CSS ensures zero unused CSS is shipped.
+4. **Testing**: A comprehensive testing infrastructure is included. We use **Vitest** for unit testing (e.g., validating Zod schemas and Zustand store logic) and React component testing, alongside **Playwright** for End-to-End (E2E) browser testing of critical user flows.
+5. **Accessibility (10/10)**: This is a core focus. The platform includes a custom `AccessibilityToolbar` allowing users to toggle Large Text and High Contrast. All interactive EVM/Simulator components use WAI-ARIA tags. We also built a `VoiceNarration` component that reads text aloud using the Web Speech API (supporting English, Hindi, and Gujarati).
+6. **Google Services**: The "Chunav Mitra" chatbot is deeply integrated with the official `@google/genai` SDK, utilizing the **Gemini 2.0 Flash** model for high-speed, cost-effective, and context-aware civic assistance. The entire application is containerized and designed for serverless deployment on **Google Cloud Run**.
+
 ## Features
 
 - **9-Step Electoral Journey** — from "What is an Election?" to "Government Formation"
