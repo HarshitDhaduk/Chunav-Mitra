@@ -2,11 +2,12 @@ import { GoogleGenAI } from "@google/genai";
 
 // Regex patterns that trigger the hardcoded neutral response before hitting the model
 const BIAS_PATTERNS = [
-  /which party (is|should|would)/i,
-  /vote for (bjp|congress|aap|sp|bsp|tmc|dmk|ncp)/i,
-  /best (party|candidate|leader)/i,
-  /support (bjp|congress|aap|sp|bsp|tmc|dmk|ncp)/i,
+  /(which|what) party (is|should|would)/i,
+  /vote[\s\w\?]*\b(bjp|congress|aap|sp|bsp|tmc|dmk|ncp|nda|upa)\b/i,
+  /best (party|candidate|leader|cm|pm)/i,
+  /support[\s\w\?]*\b(bjp|congress|aap|sp|bsp|tmc|dmk|ncp)\b/i,
   /who (should|will|would) win/i,
+  /is \b(bjp|congress|aap|sp|bsp|tmc|dmk|ncp)\b/i
 ];
 
 export const NEUTRAL_RESPONSE =

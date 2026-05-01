@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useRouter, useParams } from "next/navigation";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import {
   BookOpen, Cpu, MessageCircle, Globe, ShieldCheck, Accessibility,
   ChevronRight, GraduationCap, Vote, Users, Star, ArrowRight,
@@ -30,7 +31,7 @@ function Navbar() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         <div className="flex items-center gap-3">
           <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900">
-            <img src="/logo.png" alt="Logo" className="h-full w-full object-cover" />
+            <Image src="/logo.png" alt="Logo" width={36} height={36} className="h-full w-full object-cover" />
           </div>
           <span className="font-bold text-slate-900 dark:text-white">Chunav Mitra</span>
         </div>
@@ -350,7 +351,7 @@ function Footer() {
         <div className="flex flex-col items-center gap-6 text-center">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900">
-              <img src="/logo.png" alt="Logo" className="h-full w-full object-cover" />
+              <Image src="/logo.png" alt="Logo" width={40} height={40} className="h-full w-full object-cover" />
             </div>
             <span className="text-lg font-bold text-slate-900 dark:text-white">Chunav Mitra</span>
           </div>

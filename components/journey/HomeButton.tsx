@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter, useParams } from "next/navigation";
+import Image from "next/image";
 import { Home } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useJourneyStore } from "@/context/journeyStore";
@@ -34,7 +35,7 @@ export function HomeButton({ asLogo = false }: Props) {
           aria-label={t("title")}
         >
           <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-white shadow-sm transition-transform group-hover:scale-105 dark:border-slate-700 dark:bg-slate-900">
-            <img src="/logo.png" alt="Logo" className="h-full w-full object-cover" />
+            <Image src="/logo.png" alt="Logo" width={40} height={40} className="h-full w-full object-cover" />
           </div>
           <div>
             <p className="text-sm font-bold leading-tight text-slate-900 dark:text-white">
