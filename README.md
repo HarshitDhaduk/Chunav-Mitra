@@ -14,7 +14,7 @@ The platform is designed around "Persona-Based Gamified Learning." Instead of re
 ### How the Solution Works
 1. **Frontend**: A Next.js 15 App Router application provides a fast, multilingual (English, Hindi, Gujarati) interface.
 2. **State**: Zustand persists the user's progress, XP, and accessibility preferences locally.
-3. **AI Chatbot**: The Google GenAI SDK (Gemini 2.0 Flash) powers the "Chunav Mitra" chatbot. It utilizes Edge Runtime API routes for streaming responses and a custom regex pre-filter to block politically biased queries before they hit the LLM.
+3. **AI Chatbot**: The Google GenAI SDK (Gemini 2.5 Flash) powers the "Chunav Mitra" chatbot. It utilizes Edge Runtime API routes for streaming responses, `react-markdown` for rich formatting, and a custom regex pre-filter to block politically biased queries before they hit the LLM. `sessionStorage` keeps the chat history persistent across navigation.
 4. **Simulator**: An interactive React component simulates the actual Indian EVM and VVPAT process with state-machine logic (Idle -> Ballot Released -> Vote Cast -> 7s VVPAT Beep).
 
 ### Assumptions Made
@@ -30,8 +30,8 @@ Here is how Chunav Mitra fulfills the 6 evaluation focus areas:
 2. **Security**: The Gemini API key is never exposed to the client. All AI requests pass through a secure Next.js Edge Runtime API route. We also implemented a custom "Layer 1" regex pre-filter to catch and neutralize politically biased prompts before they ever reach the LLM, ensuring strict political neutrality.
 3. **Efficiency**: Next.js Server Components are used by default to reduce client-side JavaScript. The Dockerfile uses `output: "standalone"` to prune node_modules and generate a minimal, highly optimized image for Google Cloud Run. Tailwind CSS ensures zero unused CSS is shipped.
 4. **Testing**: A comprehensive testing infrastructure is included. We use **Vitest** for unit testing (e.g., validating Zod schemas and Zustand store logic) and React component testing, alongside **Playwright** for End-to-End (E2E) browser testing of critical user flows.
-5. **Accessibility (10/10)**: This is a core focus. The platform includes a custom `AccessibilityToolbar` allowing users to toggle Large Text and High Contrast. All interactive EVM/Simulator components use WAI-ARIA tags. We also built a `VoiceNarration` component that reads text aloud using the Web Speech API (supporting English, Hindi, and Gujarati).
-6. **Google Services**: The "Chunav Mitra" chatbot is deeply integrated with the official `@google/genai` SDK, utilizing the **Gemini 2.0 Flash** model for high-speed, cost-effective, and context-aware civic assistance. The entire application is containerized and designed for serverless deployment on **Google Cloud Run**.
+5. **Accessibility (10/10)**: This is a core focus. The platform includes a custom `AccessibilityToolbar` allowing users to toggle Large Text and High Contrast. All interactive EVM/Simulator components use WAI-ARIA tags. We also built a `VoiceNarration` component that reads text aloud using a custom server-side `/api/tts` proxy (Google Translate TTS), bypassing the limitations of browser-native Web Speech APIs for regional Indian languages.
+6. **Google Services**: The "Chunav Mitra" chatbot is deeply integrated with the official `@google/genai` SDK, utilizing the **Gemini 2.5 Flash** model for high-speed, cost-effective, and context-aware civic assistance. The entire application is containerized and designed for serverless deployment on **Google Cloud Run**.
 
 ## Features
 
@@ -55,7 +55,7 @@ Here is how Chunav Mitra fulfills the 6 evaluation focus areas:
 | State | Zustand (persisted) |
 | Forms | React Hook Form + Zod |
 | i18n | next-intl |
-| AI | Google GenAI SDK (Gemini 2.0 Flash) |
+| AI | Google GenAI SDK (Gemini 2.5 Flash) |
 | Deployment | Vercel |
 
 ## Project Structure
@@ -73,6 +73,7 @@ frontend/
 │   │   └── verify/page.tsx         # Voter ID verification
 │   └── api/
 │       ├── chat/route.ts           # Google GenAI chatbot
+│       ├── tts/route.ts            # Server-side TTS proxy
 │       └── verify-voter/route.ts   # ECI API proxy
 ├── components/
 │   ├── journey/
@@ -179,7 +180,7 @@ npm run test:e2e      # Playwright E2E tests
 - Semantic HTML (`<main>`, `<nav>`, `<section>`)
 - ARIA live regions for dynamic content
 - 44×44px minimum touch targets
-- Voice narration via Web Speech API (language-aware)
+- Voice narration via server-side Google TTS Proxy (supporting en, hi, gu)
 - CSS data attributes for large text and high contrast modes
 
 ### Chatbot Neutrality
@@ -206,6 +207,15 @@ The easiest way to deploy this application is using Google Cloud Run's continuou
 2. Select **Dockerfile** as the build type.
 3. Add your `GEMINI_API_KEY` and `ECI_API_KEY` in the "Variables & Secrets" section.
 4. Cloud Run will automatically build and deploy your application on every push to the main branch.
+
+### Deployment Scripts
+
+A provided PowerShell script automates the full deployment pipeline to Google Cloud Run:
+
+```powershell
+./deploy-cloud-run.ps1
+```
+It handles GCP authentication, Artifact Registry setup, Docker image building, and Cloud Run service deployment.
 
 ### Manual Docker Deployment
 
