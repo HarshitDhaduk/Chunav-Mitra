@@ -8,6 +8,8 @@ import {
   ChevronRight, GraduationCap, Vote, Users, Star, ArrowRight,
 } from "lucide-react";
 import { useJourneyStore, type Persona } from "@/context/journeyStore";
+import { AccessibilityToolbar } from "@/components/accessibility/AccessibilityToolbar";
+import { VoiceNarration } from "@/components/accessibility/VoiceNarration";
 
 // ─── Animation variants ───────────────────────────────────────────────────────
 const fadeUp = {
@@ -33,19 +35,7 @@ function Navbar() {
           <span className="font-bold text-slate-900 dark:text-white">Chunav Mitra</span>
         </div>
         <div className="flex items-center gap-2">
-          {["en", "hi", "gu"].map((l) => (
-            <button
-              key={l}
-              onClick={() => router.push(`/${l}` as never)}
-              className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
-                locale === l
-                  ? "bg-orange-500 text-white"
-                  : "text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
-              }`}
-            >
-              {l === "en" ? "EN" : l === "hi" ? "हि" : "ગુ"}
-            </button>
-          ))}
+          <AccessibilityToolbar />
         </div>
       </div>
     </nav>
@@ -127,6 +117,9 @@ function HeroSection() {
             <Cpu size={18} />
             {t("ctaSimulator")}
           </button>
+          <div className="hidden">
+            <VoiceNarration text={`${t("heroTitle")} ${t("heroTitleHighlight")}. ${t("heroSubtitle")}`} />
+          </div>
         </motion.div>
 
         {/* Stats row */}

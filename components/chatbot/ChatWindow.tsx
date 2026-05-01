@@ -13,9 +13,39 @@ export function ChatWindow({ onClose }: Props) {
   const t = useTranslations("chatbot");
   const suggestions = t.raw("suggestions") as string[];
   const [messages, setMessages] = useState<Message[]>([]);
+  const [isInitialized, setIsInitialized] = useState(false);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setInput(e.target.value);
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 120)}px`;
+    }
+  };
+
+  // Load from sessionStorage on mount
+  useEffect(() => {
+    try {
+      const stored = sessionStorage.getItem("chunavMitraChatHistory");
+      if (stored) {
+        setMessages(JSON.parse(stored));
+      }
+    } catch (e) {
+      console.error("Failed to load chat history", e);
+    }
+    setIsInitialized(true);
+  }, []);
+
+  // Save to sessionStorage on change
+  useEffect(() => {
+    if (isInitialized) {
+      sessionStorage.setItem("chunavMitraChatHistory", JSON.stringify(messages));
+    }
+  }, [messages, isInitialized]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -26,6 +56,9 @@ export function ChatWindow({ onClose }: Props) {
     const userMsg: Message = { role: "user", content: text };
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+    }
     setLoading(true);
 
     const res = await fetch("/api/chat", {
@@ -106,12 +139,20 @@ export function ChatWindow({ onClose }: Props) {
         onSubmit={(e) => { e.preventDefault(); sendMessage(input); }}
         className="flex gap-2 border-t p-3"
       >
-        <input
+        <textarea
+          ref={textareaRef}
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={handleInput}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              sendMessage(input);
+            }
+          }}
           placeholder={t("placeholder")}
-          className="min-h-[44px] flex-1 rounded-xl border px-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+          className="min-h-[44px] max-h-[120px] flex-1 resize-none rounded-xl border px-3 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
           aria-label="Chat input"
+          rows={1}
         />
         <button
           type="submit"

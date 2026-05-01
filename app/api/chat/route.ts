@@ -28,7 +28,7 @@ export async function POST(req: Request) {
     const ai = createGenAIClient();
 
     const stream = await ai.models.generateContentStream({
-      model: "gemini-1.5-flash",
+      model: "gemini-2.5-flash",
       contents: [{ role: "user", parts: [{ text: message }] }],
       config: { systemInstruction: SYSTEM_PROMPT },
     });
