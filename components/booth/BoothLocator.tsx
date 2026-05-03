@@ -286,10 +286,10 @@ function BoothLocatorInner() {
   );
 }
 
-export function BoothLocator() {
-  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
+export function BoothLocator({ apiKey }: { apiKey?: string }) {
+  const finalApiKey = apiKey || process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
 
-  if (!apiKey) {
+  if (!finalApiKey) {
     return (
       <div className="flex h-64 items-center justify-center rounded-2xl border border-red-200 bg-red-50 p-6 text-center text-red-600">
         Google Maps API Key missing in .env.local
@@ -298,7 +298,7 @@ export function BoothLocator() {
   }
 
   return (
-    <APIProvider apiKey={apiKey}>
+    <APIProvider apiKey={finalApiKey}>
       <BoothLocatorInner />
     </APIProvider>
   );
