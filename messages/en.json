@@ -41,7 +41,9 @@
     "quizWrong": "Not quite. The answer is: {answer}",
     "badgeEarned": "Badge Earned: {badge}",
     "completeStep": "Complete Step +25 XP",
+    "nextQuestion": "Next Question",
     "overallProgress": "Overall Progress",
+    "explored": "Explored",
     "stepLabels": {
       "1": "What is an Election?",
       "2": "Who Can Vote?",
@@ -111,6 +113,7 @@
       "warningPoints": "Wait! You'll lose potential points if you don't check your eligibility first!",
       "alreadyEligible": "You are already eligible to vote!",
       "eligibleOn": "You become eligible on {date}",
+      "missionComplete": "Mission Accomplished! +50 XP Earned",
       "quiz": [
         {
           "question": "What is the minimum voting age in India?",
@@ -218,6 +221,7 @@
         }
       ],
       "timelineTitle": "Election Timeline",
+      "explored": "Explored",
       "phases": [
         {
           "phase": "Election Announced",
@@ -389,6 +393,11 @@
       "warningPoints": "Wait! Pack only what's allowed to earn points!",
       "prohibitedError": "Don't carry prohibited items!",
       "missionComplete": "Ready for Polling! +50 XP Earned",
+      "boothTitle": "Don't know your booth?",
+      "boothDesc": "Use our Find My Booth tool to get directions to your nearest polling station.",
+      "boothCta": "Find My Booth",
+      "quizLocked": "Quiz Locked",
+      "quizLockedDesc": "Complete the checklist verification above to unlock the quiz and earn points!",
       "checklist": [
         { "label": "Voter ID / Aadhaar / Passport" },
         { "label": "Voter slip from BLO" },

@@ -79,7 +79,7 @@ export function Step4Timeline({ onAnswered }: Props) {
             {t("timelineTitle")}
           </h3>
           <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-            {viewedPhases.size} / {phases.length} Explored
+            {viewedPhases.size} / {phases.length} {t("explored")}
           </span>
         </div>
 

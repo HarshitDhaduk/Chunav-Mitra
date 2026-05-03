@@ -17,7 +17,7 @@ export type QuizQuestion = {
 type Props = {
   stepNumber: number;
   questions: QuizQuestion[];
-  onAnswered: (correct: boolean, autoAdvance?: boolean) => void;
+  onAnswered: (correct: boolean) => void;
 };
 
 export function GamifiedQuiz({ stepNumber, questions, onAnswered }: Props) {
@@ -50,7 +50,7 @@ export function GamifiedQuiz({ stepNumber, questions, onAnswered }: Props) {
     if (isLast) {
       // All questions done — report overall as correct if at least half correct
       const totalCorrect = newResults.filter(Boolean).length;
-      onAnswered(totalCorrect >= Math.ceil(questions.length / 2), true); // autoAdvance=true on finish
+      onAnswered(totalCorrect >= Math.ceil(questions.length / 2));
     } else {
       setCurrent((c) => c + 1);
       setSelected(null);
@@ -177,7 +177,7 @@ export function GamifiedQuiz({ stepNumber, questions, onAnswered }: Props) {
               onClick={handleNext}
               className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl bg-orange-500 font-semibold text-white hover:bg-orange-600"
             >
-              {isLast ? t("completeStep") : "Next Question"}
+              {isLast ? t("completeStep") : t("nextQuestion")}
               <ChevronRight size={16} />
             </motion.button>
           )}

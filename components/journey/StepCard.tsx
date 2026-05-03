@@ -68,11 +68,9 @@ export function StepCard({ stepNumber, totalSteps }: Props) {
     advance();
   }
 
-  function handleQuizAnswered(correct: boolean, autoAdvance?: boolean) {
-    setQuizAnswered(true); // Any answer attempt counts as answered
-    if (correct && autoAdvance) {
-      advance();
-    }
+  function handleQuizAnswered(correct: boolean) {
+    setQuizAnswered(true);
+    advance();
   }
 
   const d = useTranslations("journey.dialogs");

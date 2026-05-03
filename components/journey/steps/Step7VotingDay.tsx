@@ -77,14 +77,14 @@ export function Step7VotingDay({ onAnswered }: Props) {
       <p className="leading-relaxed text-slate-600 dark:text-slate-300">{body}</p>
 
       <div className="rounded-2xl border border-orange-200 bg-orange-50 p-5 dark:border-orange-900/30 dark:bg-orange-900/10">
-        <h3 className="mb-2 font-bold text-orange-800 dark:text-orange-300">Don't know your booth?</h3>
-        <p className="mb-4 text-sm text-orange-700 dark:text-orange-400">Use our Find My Booth tool to get directions to your nearest polling station.</p>
+        <h3 className="mb-2 font-bold text-orange-800 dark:text-orange-300">{t("boothTitle")}</h3>
+        <p className="mb-4 text-sm text-orange-700 dark:text-orange-400">{t("boothDesc")}</p>
         <button
           onClick={() => router.push(`/${locale}/booth` as never)}
           className="flex items-center gap-2 rounded-xl bg-orange-500 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-all hover:bg-orange-600 active:scale-95"
         >
           <MapPin size={16} />
-          Find My Booth
+          {t("boothCta")}
         </button>
       </div>
 
@@ -250,8 +250,8 @@ export function Step7VotingDay({ onAnswered }: Props) {
           <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 text-slate-400 dark:bg-slate-800">
             <Info size={32} />
           </div>
-          <h4 className="font-bold text-slate-400">Quiz Locked</h4>
-          <p className="mt-1 text-sm text-slate-400">Complete the checklist verification above to unlock the quiz and earn points!</p>
+          <h4 className="font-bold text-slate-400">{t("quizLocked")}</h4>
+          <p className="mt-1 text-sm text-slate-400">{t("quizLockedDesc")}</p>
         </div>
       )}
     </article>

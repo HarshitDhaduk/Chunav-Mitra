@@ -151,7 +151,7 @@ export function Step2WhoCanVote({ onAnswered }: Props) {
               </div>
               {!alreadyAwarded && (
                 <div className="text-[10px] uppercase tracking-wider opacity-80">
-                  Mission Accomplished! +50 XP Earned
+                  {t("missionComplete")}
                 </div>
               )}
             </motion.div>
