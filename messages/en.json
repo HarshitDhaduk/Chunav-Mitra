@@ -525,6 +525,7 @@
     "heroSubtitle": "Understand the world's largest democracy. Learn how to register, vote, and make your voice count — in your language, at your pace.",
     "ctaPrimary": "Start My Journey",
     "ctaSimulator": "Try Vote Simulator",
+    "ctaBooth": "Find Polling Booth",
     "statsVoters": "642M+ Voters",
     "statsVotersDesc": "participated in 2024 elections",
     "statsSteps": "9 Easy Steps",
@@ -559,5 +560,23 @@
     "footerEci": "Aligned with ECI SVEEP Guidelines",
     "footerNeutral": "Strictly Politically Neutral",
     "footerFree": "Free & Open Access"
+  },
+  "booth": {
+    "title": "Find Your Polling Booth",
+    "subtitle": "Locate your designated voting center easily.",
+    "searchPlaceholder": "Search your address or pincode...",
+    "or": "OR",
+    "useLocation": "Use My Current Location",
+    "yourLocation": "Your Location",
+    "viewRoute": "View Route on Map",
+    "getDirections": "Get Directions",
+    "missingKey": "Google Maps API Key missing in .env.local",
+    "errorLocation": "Unable to retrieve your location.",
+    "errorGeo": "Geolocation is not supported by your browser.",
+    "alertLocation": "Please allow access to your location or search an address first.",
+    "findNearest": "Find Nearest Booth",
+    "locationAccess": "Allow location access to instantly find your assigned polling station.",
+    "nearestStations": "Nearest Stations:",
+    "openMap": "Open Interactive Map"
   }
 }

@@ -31,7 +31,7 @@ Here is how Chunav Mitra fulfills the 6 evaluation focus areas:
 3. **Efficiency**: Next.js Server Components are used by default to reduce client-side JavaScript. The Dockerfile uses `output: "standalone"` to prune node_modules and generate a minimal, highly optimized image for Google Cloud Run. Tailwind CSS ensures zero unused CSS is shipped.
 4. **Testing**: A comprehensive testing infrastructure is included. We use **Vitest** for unit testing (e.g., validating Zod schemas and Zustand store logic) and React component testing, alongside **Playwright** for End-to-End (E2E) browser testing of critical user flows.
 5. **Accessibility (10/10)**: This is a core focus. The platform includes a custom `AccessibilityToolbar` allowing users to toggle Large Text and High Contrast. All interactive EVM/Simulator components use WAI-ARIA tags. We also built a `VoiceNarration` component that reads text aloud using a custom server-side `/api/tts` proxy (Google Translate TTS), bypassing the limitations of browser-native Web Speech APIs for regional Indian languages.
-6. **Google Services**: The "Chunav Mitra" chatbot is deeply integrated with the official `@google/genai` SDK, utilizing the **Gemini 2.5 Flash** model for high-speed, cost-effective, and context-aware civic assistance. The entire application is containerized and designed for serverless deployment on **Google Cloud Run**.
+6. **Google Services**: The application is deeply integrated with Google Cloud. We use **Gemini 1.5 Flash** (via `@google/genai` SDK) for high-speed, cost-effective, and context-aware civic assistance. We also integrated **Google Maps Platform** (Maps JS, Places, and Directions APIs) for the Polling Booth Locator. The entire application is containerized and designed for serverless deployment on **Google Cloud Run**.
 
 ## Features
 
@@ -40,6 +40,7 @@ Here is how Chunav Mitra fulfills the 6 evaluation focus areas:
 - **Gamified Quizzes** — earn points and badges for completing steps
 - **EVM Simulator** — high-fidelity mock voting with VVPAT 7-second verification
 - **AI Chatbot (Chunav Mitra)** — Google GenAI with political neutrality guardrails
+- **Polling Booth Locator** — real-time address search (Places API), geolocation, and turn-by-turn routing (Directions API)
 - **Multilingual** — English, Hindi, Gujarati (scalable to all 22 official languages)
 - **Accessibility** — WCAG 2.1 AA compliant, voice narration, large text, high contrast
 - **Voter Verification** — EPIC number lookup via ECI API Setu
@@ -55,8 +56,9 @@ Here is how Chunav Mitra fulfills the 6 evaluation focus areas:
 | State | Zustand (persisted) |
 | Forms | React Hook Form + Zod |
 | i18n | next-intl |
-| AI | Google GenAI SDK (Gemini 2.5 Flash) |
-| Deployment | Vercel |
+| AI | Google GenAI SDK (Gemini 1.5 Flash) |
+| Maps | Google Maps Platform (@vis.gl/react-google-maps) |
+| Deployment | Google Cloud Run |
 
 ## Project Structure
 
@@ -70,6 +72,7 @@ frontend/
 │   │   │   ├── layout.tsx          # Progress bar + accessibility toolbar
 │   │   │   └── [step]/page.tsx     # Dynamic step renderer
 │   │   ├── simulator/page.tsx      # EVM simulator
+│   │   ├── booth/page.tsx          # Polling booth locator
 │   │   └── verify/page.tsx         # Voter ID verification
 │   └── api/
 │       ├── chat/route.ts           # Google GenAI chatbot
@@ -87,10 +90,13 @@ frontend/
 │   │   ├── ControlUnit.tsx
 │   │   ├── BallotingUnit.tsx
 │   │   └── VVPATDisplay.tsx
+│   ├── booth/                      # New: Map-based locator
+│   │   └── BoothLocator.tsx
 │   ├── chatbot/
-│   │   ├── ChunавMitraFAB.tsx
+│   │   ├── ChunavMitraFAB.tsx
 │   │   ├── ChatWindow.tsx
-│   │   └── MessageBubble.tsx
+│   │   ├── MessageBubble.tsx
+│   │   └── ChatBoothLocator.tsx    # Inline chatbot locator
 │   ├── accessibility/
 │   │   ├── AccessibilityToolbar.tsx
 │   │   └── VoiceNarration.tsx
@@ -131,6 +137,7 @@ Create `.env.local`:
 
 ```env
 GOOGLE_GENAI_API_KEY=your_google_genai_api_key
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_api_key
 ECI_API_KEY=your_eci_api_key
 ECI_API_BASE_URL=https://api.apisetu.gov.in
 ```

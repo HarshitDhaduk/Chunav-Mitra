@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, AlertTriangle, CheckCircle, Info } from "lucide-react";
+import { Sparkles, AlertTriangle, CheckCircle, Info, MapPin } from "lucide-react";
+import { useRouter, useParams } from "next/navigation";
 import { GamifiedQuiz } from "../GamifiedQuiz";
 import { VoiceNarration } from "@/components/accessibility/VoiceNarration";
 import { useJourneyStore } from "@/context/journeyStore";
@@ -11,6 +12,8 @@ type Props = { onAnswered: (correct: boolean) => void };
 export function Step7VotingDay({ onAnswered }: Props) {
   const t = useTranslations("steps.7");
   const { addXp, awardBonus, completedBonuses, stepData, setStepData } = useJourneyStore();
+  const router = useRouter();
+  const { locale } = useParams<{ locale: string }>();
   
   // Initialize from persistent store
   const [checked, setChecked] = useState<Set<number>>(() => {
@@ -72,6 +75,18 @@ export function Step7VotingDay({ onAnswered }: Props) {
       </div>
 
       <p className="leading-relaxed text-slate-600 dark:text-slate-300">{body}</p>
+
+      <div className="rounded-2xl border border-orange-200 bg-orange-50 p-5 dark:border-orange-900/30 dark:bg-orange-900/10">
+        <h3 className="mb-2 font-bold text-orange-800 dark:text-orange-300">Don't know your booth?</h3>
+        <p className="mb-4 text-sm text-orange-700 dark:text-orange-400">Use our Find My Booth tool to get directions to your nearest polling station.</p>
+        <button
+          onClick={() => router.push(`/${locale}/booth` as never)}
+          className="flex items-center gap-2 rounded-xl bg-orange-500 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-all hover:bg-orange-600 active:scale-95"
+        >
+          <MapPin size={16} />
+          Find My Booth
+        </button>
+      </div>
 
       {/* Booth sequence */}
       <div className="grid gap-3 sm:grid-cols-1">

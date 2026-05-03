@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import {
   BookOpen, Cpu, MessageCircle, Globe, ShieldCheck, Accessibility,
-  ChevronRight, GraduationCap, Vote, Users, Star, ArrowRight,
+  ChevronRight, GraduationCap, Vote, Users, Star, ArrowRight, MapPin,
 } from "lucide-react";
 import { useJourneyStore, type Persona } from "@/context/journeyStore";
 import { AccessibilityToolbar } from "@/components/accessibility/AccessibilityToolbar";
@@ -117,6 +117,13 @@ function HeroSection() {
           >
             <Cpu size={18} />
             {t("ctaSimulator")}
+          </button>
+          <button
+            onClick={() => router.push(`/${locale}/booth` as never)}
+            className="flex min-h-[52px] items-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-8 py-3 font-semibold text-white backdrop-blur transition-all hover:bg-white/20"
+          >
+            <MapPin size={18} />
+            {t("ctaBooth")}
           </button>
           <div className="hidden">
             <VoiceNarration text={`${t("heroTitle")} ${t("heroTitleHighlight")}. ${t("heroSubtitle")}`} />

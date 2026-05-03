@@ -1,9 +1,15 @@
 import ReactMarkdown from "react-markdown";
+import { ChatBoothLocator } from "./ChatBoothLocator";
 
 type Props = { role: "user" | "assistant"; content: string };
 
 export function MessageBubble({ role, content }: Props) {
   const isUser = role === "user";
+  const hasBoothAction = !isUser && content.includes("[ACTION:FIND_BOOTH]");
+  const displayContent = hasBoothAction 
+    ? content.replace("[ACTION:FIND_BOOTH]", "").trim() 
+    : content;
+
   return (
     <div className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
       <div
@@ -14,10 +20,11 @@ export function MessageBubble({ role, content }: Props) {
         }`}
       >
         {isUser ? (
-          content
+          displayContent
         ) : (
           <div className="space-y-2 [&>p]:m-0 [&>ul]:m-0 [&>ul]:list-disc [&>ul]:pl-5 [&>ol]:m-0 [&>ol]:list-decimal [&>ol]:pl-5 [&>h1]:font-bold [&>h2]:font-bold [&>h3]:font-bold">
-            <ReactMarkdown>{content}</ReactMarkdown>
+            <ReactMarkdown>{displayContent}</ReactMarkdown>
+            {hasBoothAction && <ChatBoothLocator />}
           </div>
         )}
       </div>
